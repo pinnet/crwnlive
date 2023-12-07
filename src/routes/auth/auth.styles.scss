@@ -1,6 +1,10 @@
-.sign-in-page {
-    width: 850px;
+.auth-container {
     display: flex;
-    justify-content: space-between;
-    margin: 30px auto;
+    justify-content: space-around;
+    margin: 60px;
+}
+
+h2 {
+    margin: auto;
+    justify-content: center;
 }

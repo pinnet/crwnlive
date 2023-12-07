@@ -2,7 +2,6 @@ import './sign-up-form.styles.scss';
 import { useState } from 'react';
 import { createAuthUserFromEmailAndPassword, createUserDocumentFromGoogleAuth } from '../../utils/firebase.utils';
 
-
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
@@ -17,6 +16,10 @@ const SignUpForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { displayName, email, password, confirmPassword } = formState;
 
+    const resetForm = () => {
+        setFormState(defaultFormState);
+    };
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
@@ -29,9 +32,8 @@ const SignUpForm = () => {
         }
         try {
             const { user } = await createAuthUserFromEmailAndPassword(email, password);
-            console.log(user);
             await createUserDocumentFromGoogleAuth(user, { displayName });
-            setFormState(defaultFormState);
+            resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('Email already in use');
@@ -44,9 +46,9 @@ const SignUpForm = () => {
             <h2>Don't have an account</h2>
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleChange} label='Display Name' required type="text" name='displayName' value={displayName} />
-                <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} />
-                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} />
-                <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} />
+                <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
+                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} autoComplete='new-password' />
+                <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} autoComplete='new-password' />
                 <CustomButton type="submit" >Sign Up</CustomButton>
             </form>
         </div>

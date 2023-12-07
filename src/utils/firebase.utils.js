@@ -1,4 +1,3 @@
-/*eslint no-undef: */
 /*eslint no-unused-vars: */
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
@@ -10,6 +9,7 @@ import {
     GoogleAuthProvider,
     signInWithRedirect,
     signInWithPopup,
+    signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
 } from "firebase/auth";
@@ -37,6 +37,10 @@ export const db = getFirestore();
 export const auth = getAuth();
 export const signInWithGooglePopUp = () => { return signInWithPopup(auth, provider); }
 export const signInWithGoogleRedirect = () => { return signInWithRedirect(auth, provider); }
+export const signInWithEmailAndPasswordAuth = (email, password) => {
+    if (!email || !password) throw new Error('Email or Password is null');
+    return signInWithEmailAndPassword(auth, email, password);
+}
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
     if (!email || !password) throw new Error('Email or Password is null');
     return await createUserWithEmailAndPassword(auth, email, password);

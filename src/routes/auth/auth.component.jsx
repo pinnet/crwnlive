@@ -1,7 +1,7 @@
 import './auth.styles.scss';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { getRedirectResult } from 'firebase/auth';
-import { auth, signInWithGoogleRedirect, createUserDocumentFromGoogleAuth } from '../../utils/firebase.utils';
+import { auth, createUserDocumentFromGoogleAuth } from '../../utils/firebase.utils';
 
 import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
 import SignInForm from '../../components/sign-in-form/sign-in-form.component';
@@ -25,20 +25,14 @@ const Auth = () => {
         }
     }, [didMount]);
 
-    const loginWithGoogleRedirect = async () => {
-        try {
-            await signInWithGoogleRedirect();
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
     return (
-        <div className='sign-in-page'>
-            <SignInForm />
-            <SignUpForm />
-        </div>
+        <Fragment>
+            <h2>Sign In</h2>
+            <div className='auth-container'>
+                <SignInForm />
+                <SignUpForm />
+            </div>
+        </Fragment>
     )
 }
 export default Auth;
