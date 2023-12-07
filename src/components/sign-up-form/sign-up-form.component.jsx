@@ -40,14 +40,14 @@ const SignUpForm = () => {
         }
     }
     return (
-        <div>
-            <h1>Sign Up Form</h1>
+        <div className='sign-up-container'>
+            <h2>Don't have an account</h2>
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleChange} label='Display Name' required type="text" name='displayName' value={displayName} />
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} />
                 <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} />
                 <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} />
-                <CustomButton type="submit">Sign Up</CustomButton>
+                <CustomButton type="submit" >Sign Up</CustomButton>
             </form>
         </div>
     );

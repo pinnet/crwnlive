@@ -48,9 +48,8 @@ const SignIn = () => {
     }
     return (
         <div>
-            <h1>Sign In</h1>
-            <button onClick={loginWithGooglePopUp}>Sign In With Google</button>
-            <button onClick={loginWithGoogleRedirect}>Sign In With Google</button>
+            <h2>Sign In</h2>
+
             <SignUpForm />
         </div>
     )
