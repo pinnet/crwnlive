@@ -43,14 +43,11 @@ const SignUpForm = () => {
         <div>
             <h1>Sign Up Form</h1>
             <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input required type="text" placeholder="Enter Name" name='displayName' value={displayName} onChange={handleChange} />
-                <label>Email</label>
-                <input required type="email" placeholder="Enter Email" name='email' value={email} onChange={handleChange} />
-                <label>Password</label>
-                <input required type="password" placeholder="Enter a password" name='password' value={password} onChange={handleChange} />
-                <input required type="password" placeholder="Confirm Password" name='confirmPassword' value={confirmPassword} onChange={handleChange} />
-                <button type="submit">Sign Up</button>
+                <FormInput handleChange={handleChange} label='Display Name' required type="text" name='displayName' value={displayName} />
+                <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} />
+                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} />
+                <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} />
+                <CustomButton type="submit">Sign Up</CustomButton>
             </form>
         </div>
     );
