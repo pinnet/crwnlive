@@ -2,6 +2,7 @@ import './components/directory/directory.component';
 import Directory from './components/directory/directory.component';
 
 const App = () => {
+
   const categories = [
     {
       "id": 1,
