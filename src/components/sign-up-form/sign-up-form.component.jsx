@@ -2,7 +2,7 @@ import './sign-up-form.styles.scss';
 import { useState } from 'react';
 import { createAuthUserFromEmailAndPassword, createUserDocumentFromGoogleAuth } from '../../utils/firebase.utils';
 
-import Form from '../form/form.component';
+
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
