@@ -2,7 +2,6 @@ import NavBar from './components/nav-bar/nav-bar.component';
 import Home from './routes/home/home.component';
 import SignIn from './routes/sign-in/sign-in.component';
 
-
 import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
