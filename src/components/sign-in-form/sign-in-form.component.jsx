@@ -71,7 +71,7 @@ const SignInForm = () => {
                 <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} autoComplete='current-password' />
                 <div className='buttons-container'>
                     <CustomButton type="submit" >Sign In</CustomButton>
-                    <CustomButton buttonType='google' onClick={signInWithGoogle} >Sign In With Google</CustomButton>
+                    <CustomButton buttonType='google' onClick={signInWithGoogle} >Google Sign In</CustomButton>
                 </div>
             </form>
         </div>
