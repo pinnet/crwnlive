@@ -7,14 +7,13 @@
  */
 
 import { useState } from 'react';
-
 import './sign-in-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { 
     signInWithGooglePopUp,
     createUserDocumentFromGoogleAuth,
-    signInWithEmailAndPasswordAuth
+    signInWithEmailAndPasswordAuth,
  } from '../../utils/firebase.utils';
 
 const defaultFormState = {
@@ -46,10 +45,23 @@ const SignInForm = () => {
             console.log(user);
             resetForm();
         } catch (error) {
-            if (error.code === 'auth/invalid-credential') {
-                alert('Unknown email address / password. Please try again or sign up for an account.');
+            switch (error.code) {
+                case 'auth/invalid-password':
+                    alert('Invalid password');
+                    break;
+                case 'auth/user-disabled':
+                    alert('User disabled');
+                    break;
+                case 'auth/user-not-found':
+                    alert('User not found');
+                    break;
+                case 'auth/invalid-credential':
+                    alert('Invalid credential');
+                    break;                
+                default:
+                    alert('Unknown error');
             }
-            console.log(error);
+            console.log(error.code, error.message); 
         }
     }
 
@@ -68,10 +80,10 @@ const SignInForm = () => {
             <h2>Already have an account</h2>
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
-                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' value={password} autoComplete='current-password' />
+                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,22}' title='minimum 8 characters' value={password} autoComplete='current-password' />
                 <div className='buttons-container'>
                     <CustomButton type="submit" >Sign In</CustomButton>
-                    <CustomButton buttonType='google' onClick={signInWithGoogle} >Google Sign In</CustomButton>
+                    <CustomButton type="button" buttonType='google' onClick={signInWithGoogle} >Google Sign In</CustomButton>
                 </div>
             </form>
         </div>
