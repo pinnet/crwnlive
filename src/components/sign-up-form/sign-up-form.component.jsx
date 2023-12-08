@@ -64,7 +64,7 @@ const SignUpForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleChange} label='Display Name' required type="text" name='displayName' value={displayName} />
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
-                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,12}'  title='minimum 8 characters' value={password} autoComplete='new-password' />
+                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,12}' title='minimum 8 characters' value={password} autoComplete='new-password' />
                 <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} autoComplete='new-password' />
                 <CustomButton type="submit" >Sign Up</CustomButton>
             </form>
