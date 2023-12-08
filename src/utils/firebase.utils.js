@@ -106,3 +106,9 @@ export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
     }
     return userDocRef;
 }
+
+/**
+ * Signs the user out.
+ * @param {function} signUserOut - The signOut function from Firebase authentication.
+ */
+ export const signUserOut = async () => await signOut(auth);

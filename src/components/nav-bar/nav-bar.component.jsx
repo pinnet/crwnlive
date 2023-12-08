@@ -7,6 +7,7 @@
  */
 
 import './nav-bar.styles.scss'
+import { signUserOut } from '../../utils/firebase.utils';
 import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
@@ -16,7 +17,11 @@ import { UserContext } from '../../contexts/user.context';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const NavBar = () => {
-    const { user } = useContext(UserContext);
+    const { user,setUser } = useContext(UserContext);
+    const  signOutHandler = async() => {
+        await signUserOut();
+        setUser(null);
+    }
     return (
         <Fragment>
             <div className="navigation">
@@ -27,7 +32,11 @@ const NavBar = () => {
                     <Link className='nav-link' to="/">Home</Link>
                     <Link className='nav-link' to="/shop">Shop</Link>
                     <Link className='nav-link' to="/contact">Contact</Link>
-                    <Link className='nav-link' to="/auth">{ (user === null)? 'Sign in' : 'Sign out'}</Link>
+                    {
+                        user ? (
+                        <span className='nav-link' onClick={() => signOutHandler()}>Sign out</span>) : (
+                        <span><Link className='nav-link' to="/auth">Sign in</Link></span>)
+                    }
                 </div>
             </div>
             <Outlet />
