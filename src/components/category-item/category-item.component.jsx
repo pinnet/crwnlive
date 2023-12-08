@@ -1,5 +1,10 @@
 import './category-item.styles.scss';
 
+/**
+ * Renders a category item component.
+ * @param {Object} category - The category object containing title and imageUrl.
+ * @returns {JSX.Element} The rendered category item component.
+ */
 const CategoryItem = ({ category: { title, imageUrl } }) => (
     <div className="category-container">
         <div className='background-image' style={{ backgroundImage: `url(${imageUrl})` }} />

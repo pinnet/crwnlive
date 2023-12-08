@@ -1,8 +1,9 @@
-
 import Directory from '../../components/directory/directory.component';
-//import Navbar from '../../nav-bar/nav-bar.component';
-//import { Outlet } from 'react-router-dom';
 
+/**
+ * Represents the Home component.
+ * @returns {JSX.Element} The rendered Home component.
+ */
 const Home = () => {
 
     const categories = [

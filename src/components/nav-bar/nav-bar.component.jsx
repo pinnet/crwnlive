@@ -3,6 +3,10 @@ import { Fragment } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
+/**
+ * Renders the navigation bar component.
+ * @returns {JSX.Element} The rendered navigation bar.
+ */
 const NavBar = () => {
 
     return (
