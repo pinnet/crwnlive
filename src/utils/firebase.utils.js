@@ -10,8 +10,6 @@
 
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
-
-// ---------------------------------- Google Authentication ----------------------------------
 import {
     createUserWithEmailAndPassword,
     getAuth,
@@ -34,14 +32,19 @@ const firebaseConfig = {
     messagingSenderId: "963003893980",
     appId: "1:963003893980:web:697e99d1d7e7e7325d8c19"
 };
-
 const firebaseApp = initializeApp(firebaseConfig);
-
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
-// ---------------------------------- Google Authentication ----------------------------------
 
+/**
+ * Firebase database instance.
+ * @type {Firestore}
+ */
 export const db = getFirestore();
+/**
+ * The authentication object for Firebase.
+ * @type {Object}
+ */
 export const auth = getAuth();
 
 /**

@@ -5,8 +5,6 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
-
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
