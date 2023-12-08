@@ -7,7 +7,6 @@
  */
 
 /*eslint no-unused-vars: */
-
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import {
@@ -20,9 +19,6 @@ import {
     signOut,
     onAuthStateChanged
 } from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
     apiKey: "AIzaSyBrxMC-_B-jhrDeSSWMX4HChSRkT8DbStA",
@@ -82,7 +78,6 @@ export const signInWithEmailAndPasswordAuth = (email, password) => {
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
     if (!email || !password) throw new Error('Email or Password is null');
     return await createUserWithEmailAndPassword(auth, email, password);
-
 }
 /**
  * Creates a user document in Firestore from Google authentication data.
@@ -92,9 +87,7 @@ export const createAuthUserFromEmailAndPassword = async (email, password) => {
  * @throws {Error} - If userAuth is null or if there is an error creating the user document.
  */
 export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
-
     if (!userAuth) throw new Error('UserAuth is null');
-
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapShot = await getDoc(userDocRef);
     if (!userSnapShot.exists()) {
