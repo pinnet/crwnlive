@@ -1,14 +1,23 @@
-import './sign-in-form.styles.scss';
 import { useState } from 'react';
+
+import './sign-in-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import { signInWithGooglePopUp, createUserDocumentFromGoogleAuth, signInWithEmailAndPasswordAuth } from '../../utils/firebase.utils';
+import { 
+    signInWithGooglePopUp,
+    createUserDocumentFromGoogleAuth,
+    signInWithEmailAndPasswordAuth
+ } from '../../utils/firebase.utils';
 
 const defaultFormState = {
     email: '',
     password: ''
 }
 
+/**
+ * Represents a sign-in form component.
+ * @returns {JSX.Element} The sign-in form component.
+ */
 const SignInForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { email, password } = formState;

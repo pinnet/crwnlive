@@ -32,20 +32,53 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 // ---------------------------------- Google Authentication ----------------------------------
 
-
 export const db = getFirestore();
 export const auth = getAuth();
-export const signInWithGooglePopUp = () => { return signInWithPopup(auth, provider); }
-export const signInWithGoogleRedirect = () => { return signInWithRedirect(auth, provider); }
+
+/**
+ * Sign in with Google using a pop-up window.
+ * @returns {Promise<void>} A promise that resolves when the sign-in process is complete.
+ */
+export const signInWithGooglePopUp = () => { 
+    return signInWithPopup(auth, provider); 
+    }
+/**
+ * Sign in with Google using redirect.
+ * @returns {Promise<void>} A promise that resolves when the sign-in process is complete.
+ */
+export const signInWithGoogleRedirect = () => {
+     return signInWithRedirect(auth, provider); 
+    }
+/**
+ * Sign in with email and password.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {Promise} - A promise that resolves with the user's authentication information.
+ * @throws {Error} - If email or password is null.
+ */
 export const signInWithEmailAndPasswordAuth = (email, password) => {
     if (!email || !password) throw new Error('Email or Password is null');
     return signInWithEmailAndPassword(auth, email, password);
 }
+/**
+ * Creates a new user with the provided email and password.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {Promise} - A promise that resolves with the created user.
+ * @throws {Error} - If email or password is null.
+ */
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
     if (!email || !password) throw new Error('Email or Password is null');
     return await createUserWithEmailAndPassword(auth, email, password);
 
 }
+/**
+ * Creates a user document in Firestore from Google authentication data.
+ * @param {Object} userAuth - The user authentication data.
+ * @param {Object} extraInfo - Additional information to be included in the user document.
+ * @returns {Promise<DocumentReference>} - The reference to the created user document.
+ * @throws {Error} - If userAuth is null or if there is an error creating the user document.
+ */
 export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
 
     if (!userAuth) throw new Error('UserAuth is null');

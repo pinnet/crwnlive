@@ -1,6 +1,6 @@
 import NavBar from './components/nav-bar/nav-bar.component';
 import Home from './routes/home/home.component';
-import Auth from './routes/auth/auth.component';
+import Auth from './routes/auth/authtentication.component.jsx';
 
 import { Routes, Route } from 'react-router-dom';
 

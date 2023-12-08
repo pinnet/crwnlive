@@ -1,7 +1,10 @@
-import './sign-up-form.styles.scss';
 import { useState } from 'react';
-import { createAuthUserFromEmailAndPassword, createUserDocumentFromGoogleAuth } from '../../utils/firebase.utils';
 
+import { 
+    createAuthUserFromEmailAndPassword,
+    createUserDocumentFromGoogleAuth
+} from '../../utils/firebase.utils';
+import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
@@ -12,6 +15,10 @@ const defaultFormState = {
     confirmPassword: ''
 }
 
+/**
+ * Represents a sign-up form component.
+ * @returns {JSX.Element} The sign-up form component.
+ */
 const SignUpForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { displayName, email, password, confirmPassword } = formState;
