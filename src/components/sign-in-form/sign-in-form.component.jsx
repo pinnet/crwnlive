@@ -78,6 +78,7 @@ const SignInForm = () => {
     return (
         <div className='sign-in-container'>
             <h2>Already have an account</h2>
+            <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
                 <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,22}' title='minimum 8 characters' value={password} autoComplete='current-password' />
