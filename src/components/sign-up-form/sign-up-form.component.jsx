@@ -1,3 +1,12 @@
+/*
+ * sign-up-form.component.jsx
+ * Created on Fri Dec 08 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
+
 import { useState } from 'react';
 
 import { 

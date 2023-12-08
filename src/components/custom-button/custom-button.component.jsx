@@ -1,3 +1,11 @@
+/*
+ * custom-button.component.jsx
+ * Created on Fri Dec 08 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
 import './custom-button.styles.scss';
 
 const BUTTON_TYPE_CLASSES = {

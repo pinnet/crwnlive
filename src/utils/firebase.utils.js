@@ -1,4 +1,13 @@
+/*
+ * firebase.utils.js
+ * Created on Fri Dec 08 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
 /*eslint no-unused-vars: */
+
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 

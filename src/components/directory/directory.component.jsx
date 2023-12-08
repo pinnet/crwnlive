@@ -1,3 +1,11 @@
+/*
+ * directory.component.jsx
+ * Created on Fri Dec 08 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
 import CategoryItem from '../category-item/category-item.component';
 import './directory.styles.scss'
 

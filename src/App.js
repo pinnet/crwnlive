@@ -1,3 +1,12 @@
+/*
+ * App.js
+ * Created on Fri Dec 08 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
+
 import NavBar from './components/nav-bar/nav-bar.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
