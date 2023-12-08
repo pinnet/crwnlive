@@ -1,7 +1,7 @@
 import Directory from '../../components/directory/directory.component';
 
 /**
- * Represents the Home component.
+ * Renders the Home component.
  * @returns {JSX.Element} The rendered Home component.
  */
 const Home = () => {
