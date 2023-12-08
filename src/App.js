@@ -1,6 +1,6 @@
 import NavBar from './components/nav-bar/nav-bar.component';
 import Home from './routes/home/home.component';
-import Auth from './routes/auth/authtentication.component.jsx';
+import Authentication from './routes/auth/authtentication.component.jsx';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="shop" element={<Home />} />
         <Route path="contact" element={<Home />} />
-        <Route path="auth" element={<Auth />} />
+        <Route path="auth" element={<Authentication />} />
       </Route>
     </Routes>
   )
