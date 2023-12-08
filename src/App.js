@@ -5,15 +5,13 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
+import { Routes, Route } from 'react-router-dom';
 
 import NavBar from './components/nav-bar/nav-bar.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
 import Contact from './routes/contact/contact.component';
 import Authentication from './routes/auth/authtentication.component.jsx';
-
-import { Routes, Route } from 'react-router-dom';
 
 /**
  * The main component of the application.
