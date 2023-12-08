@@ -17,10 +17,10 @@ import { UserContext } from '../../contexts/user.context';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const NavBar = () => {
-    const { user,setUser } = useContext(UserContext);
+    const { currentUser,setCurrentUser } = useContext(UserContext);
     const  signOutHandler = async() => {
         await signUserOut();
-        setUser(null);
+        setCurrentUser(null);
     }
     return (
         <Fragment>
@@ -33,7 +33,7 @@ const NavBar = () => {
                     <Link className='nav-link' to="/shop">Shop</Link>
                     <Link className='nav-link' to="/contact">Contact</Link>
                     {
-                        user ? (
+                        currentUser ? (
                         <span className='nav-link' onClick={() => signOutHandler()}>Sign out</span>) : (
                         <span><Link className='nav-link' to="/auth">Sign in</Link></span>)
                     }

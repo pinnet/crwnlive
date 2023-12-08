@@ -30,7 +30,7 @@ const SignInForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { email, password } = formState;
 
-    const { setUser } = useContext(UserContext);
+    const { setCurrentUser } = useContext(UserContext);
 
     const resetForm = () => {
         setFormState(defaultFormState);
@@ -45,7 +45,7 @@ const SignInForm = () => {
         event.preventDefault();
         try {
             const { user } = await signInWithEmailAndPasswordAuth(email, password);
-            setUser(user);
+            setCurrentUser(user);
             console.log(user);
             resetForm();
         } catch (error) {

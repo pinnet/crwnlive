@@ -31,7 +31,7 @@ const defaultFormState = {
 const SignUpForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { displayName, email, password, confirmPassword } = formState;
-    const { setUser } = useContext(UserContext);
+    const { setCurrentUser } = useContext(UserContext);
 
     const resetForm = () => {
         setFormState(defaultFormState);
@@ -50,7 +50,7 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserFromEmailAndPassword(email, password);
             await createUserDocumentFromGoogleAuth(user, { displayName })
-            setUser(user);
+            setCurrentUser(user);
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
