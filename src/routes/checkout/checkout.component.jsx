@@ -1,9 +1,28 @@
+/**
+ * @fileoverview Checkout component for the shopping cart.
+ * @module Checkout
+ * @requires react
+ * @requires react/context
+ * @requires ../../contexts/cart.context
+ * @requires ../../components/checkout-item/checkout-item.component
+ */
+/*
+ * Created on Sat Dec 09 2023
+ *
+ * Copyright (c) 2023 dannyarnold.com
+ * Author: Danny Arnold
+ */
+
+
 import './checkout.styles.scss';
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/cart.context';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-
+/**
+ * Renders the Checkout component.
+ * @returns {JSX.Element} The rendered Checkout component.
+ */
 const Checkout = () => {
     const { cartItems,cartTotal,clearCart} = useContext(CartContext);
     const clearCartHandler = () => {
