@@ -11,7 +11,7 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './cart-dropdown.styles.scss'
 import { useContext } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
@@ -23,6 +23,16 @@ import CartItem from '../cart-item/cart-item.component';
  * @returns {JSX.Element} The rendered CartDropdown component.
  */
 const CartDropdown = () => {
+    
+    const { setCartVisable } = useContext(CartContext);
+    const navigate = useNavigate();
+    
+    const goToCheckout = () => {
+        setCartVisable(false);
+        navigate('/checkout');
+    }
+
+
     const { cartItems } = useContext(CartContext);
     return (
         <div className='cart-dropdown-container'>
@@ -31,8 +41,8 @@ const CartDropdown = () => {
                     cartItems.map(item => <CartItem key={item.id} item={item} />)
                 }
             </div>
-            <Link className='cart-dropdown-link' to="/checkout">
-            <CustomButton>GO TO CHECKOUT</CustomButton></Link>
+            
+            <CustomButton onClick={goToCheckout}>GO TO CHECKOUT</CustomButton>
         </div>
     );
 }

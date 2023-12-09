@@ -85,15 +85,12 @@ export const CartProvider = ({ children }) => {
         setCartItems(removeItemFromCartItems(cartItems, item));
     }
     const removeAllFromCart = (item) => {
-        console.log('removeAllFromCart', item);
         if (cartItems.length === 0) return;
         setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));       
     }
     const clearCart = () => {
         setCartItems([]);
     }
-    console.log('cartItems', cartItems);
-
     return (
         <CartContext.Provider value={{ 
             isCartVisable,
