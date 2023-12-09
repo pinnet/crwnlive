@@ -5,6 +5,12 @@ export const UserContext = createContext({
     setCurrentUser: () => null
 });
 
+/**
+ * UserProvider component that provides user context to its children.
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The children components.
+ * @returns {JSX.Element} The UserProvider component.
+ */
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -17,8 +23,7 @@ export const UserProvider = ({ children }) => {
     });
     return unsubscribe;
   },[]); 
-
-
+  
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
