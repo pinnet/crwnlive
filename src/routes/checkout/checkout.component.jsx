@@ -5,8 +5,7 @@
  * @requires react/context
  * @requires ../../contexts/cart.context
  * @requires ../../components/checkout-item/checkout-item.component
- */
-/*
+ * @exports Checkout
  * Created on Sat Dec 09 2023
  *
  * Copyright (c) 2023 dannyarnold.com
