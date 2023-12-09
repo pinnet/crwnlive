@@ -34,8 +34,9 @@ const NavBar = () => {
                     <Link className='nav-link' to="/contact">Contact</Link>
                     {
                         currentUser ? (
-                        <span className='nav-link' onClick={() => signOutHandler()}>Sign out</span>) : (
-                        <span><Link className='nav-link' to="/auth">Sign in</Link></span>)
+                            <span className='nav-link' onClick={() => signOutHandler()}>Sign out</span>) : (
+                            <span><Link className='nav-link' to="/auth">Sign in</Link></span>
+                        )
                     }
                 </div>
             </div>
