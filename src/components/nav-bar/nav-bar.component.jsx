@@ -1,6 +1,12 @@
+/**
+ * @file FILEPATH: /home/danny/localdev/javascript/reactredux/crwn/src/components/nav-bar/nav-bar.component.jsx
+ * @description Renders the navigation bar component.
+ * @module NavBar
+ * @returns {JSX.Element} The rendered navigation bar.
+ * @exports NavBar
+ */
 /*
- * nav-bar.component.jsx
- * Created on Fri Dec 08 2023
+ * Created on Sat Dec 09 2023
  *
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
@@ -12,6 +18,8 @@ import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { UserContext } from '../../contexts/user.context';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 /**
  * Renders the navigation bar component.
  * @returns {JSX.Element} The rendered navigation bar.
@@ -37,7 +45,9 @@ const NavBar = () => {
                             <span><Link className='nav-link' to="/auth">Sign in</Link></span>
                         )
                     }
+                    <CartIcon />
                 </div>
+                <CartDropdown />
             </div>
             <Outlet />
         </Fragment>

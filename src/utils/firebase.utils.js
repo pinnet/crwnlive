@@ -6,9 +6,7 @@
  * Author: Danny Arnold
  */
 
-/*eslint no-unused-vars: */
-
-import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import {
     createUserWithEmailAndPassword,
@@ -20,7 +18,6 @@ import {
     signOut,
     onAuthStateChanged   
 } from "firebase/auth";
-
 const firebaseConfig = {
     apiKey: "AIzaSyBrxMC-_B-jhrDeSSWMX4HChSRkT8DbStA",
     authDomain: "crwndb-bdda6.firebaseapp.com",
@@ -29,9 +26,11 @@ const firebaseConfig = {
     messagingSenderId: "963003893980",
     appId: "1:963003893980:web:697e99d1d7e7e7325d8c19"
 };
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
+
+//------------------------------------------------------------------------------ Exports
 
 /**
  * Firebase database instance.
@@ -43,7 +42,6 @@ export const db = getFirestore();
  * @type {Object}
  */
 export const auth = getAuth();
-
 /**
  * Sign in with Google using a pop-up window.
  * @returns {Promise<void>} A promise that resolves when the sign-in process is complete.
@@ -107,13 +105,11 @@ export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
     }
     return userDocRef;
 }
-
 /**
  * Signs the user out.
  * @returns {Promise<void>} A promise that resolves when the user is signed out.
  */
  export const signUserOut = async () => await signOut(auth);
-
 /**
  * Registers an authentication state change listener.
  * @param {function} callback - The callback function to be called when the authentication state changes.
