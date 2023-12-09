@@ -7,6 +7,7 @@
  */
 
 /*eslint no-unused-vars: */
+
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import {
@@ -112,8 +113,6 @@ export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
  * @returns {Promise<void>} A promise that resolves when the user is signed out.
  */
  export const signUserOut = async () => await signOut(auth);
-
-
 
 /**
  * Registers an authentication state change listener.
