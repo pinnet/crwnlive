@@ -14,6 +14,7 @@ import { BrowserRouter } from 'react-router-dom';
 //Local imports
 import './index.scss';
 import { UserProvider } from './contexts/user.context';
+import { CartProvider } from './contexts/cart.context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -23,7 +24,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,6 +1,6 @@
 /**
  * @file Provides the CartItemsContext and CartItemsProvider components for managing cart items.
- * @module cart-items.context
+ * @module cart.context
  * @requires react
  */
 /*
@@ -14,28 +14,28 @@
 import { createContext, useState } from 'react';
 
 /**
- * Context object for managing cart items.
+ * Context object for managing the cart.
  * @type {object}
  * @property {Array} items - The array of cart items.
  * @property {Function} setItems - The function to update the cart items.
  */
-export const CartItemsContext = createContext({
-    items: [],
-    setItems: () => null
+export const CartContext = createContext({
+    isVisable: false,
+    setVisable: () => {}
 });
 
 /**
- * Provider component for the CartItemsContext.
+ * Provider component for the CartContext.
  * @param {object} props - The component props.
  * @param {ReactNode} props.children - The child components.
  * @returns {JSX.Element} The rendered JSX element.
  */
-export const CartItemsProvider = ({ children }) => {
-    const [items, setItems] = useState([]);
+export const CartProvider = ({ children }) => {
+    const [isVisable, setVisable] = useState(false);
 
     return (
-        <CartItemsContext.Provider value={{ items, setItems }}>
+        <CartContext.Provider value={{ isVisable, setVisable }}>
             {children}
-        </CartItemsContext.Provider>
+        </CartContext.Provider>
     );
 }

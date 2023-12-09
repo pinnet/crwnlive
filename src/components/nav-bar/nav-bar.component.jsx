@@ -18,6 +18,7 @@ import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { UserContext } from '../../contexts/user.context';
+import { CartContext } from '../../contexts/cart.context';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 /**
@@ -25,6 +26,8 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const NavBar = () => {
+    const { isVisable, setVisable } = useContext(CartContext);
+    console.log('NavBar isVisable: ', isVisable);
     const { currentUser} = useContext(UserContext);
     const  signOutHandler = async() => {
         await signUserOut();
@@ -45,9 +48,11 @@ const NavBar = () => {
                             <span><Link className='nav-link' to="/auth">Sign in</Link></span>
                         )
                     }
-                    <CartIcon />
+                    <CartIcon onClick={()=>{setVisable(!isVisable)}}/>
                 </div>
-                <CartDropdown />
+                    {
+                        isVisable ? <CartDropdown /> : null
+                    }
             </div>
             <Outlet />
         </Fragment>
