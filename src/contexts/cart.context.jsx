@@ -68,14 +68,19 @@ export const CartProvider = ({ children }) => {
     const [cartTotal, setCartTotal] = useState(0);
 
     useEffect(() => {
-        let total = 0;
         let quantity = 0;
         cartItems.forEach(item => {
-            total += item.price * item.quantity;
             quantity += item.quantity;
         });
-        setCartTotal(total);
         setQuantity(quantity);
+    }, [cartItems]);
+
+    useEffect(() => {
+        let total = 0;
+        cartItems.forEach(item => {
+            total += item.price * item.quantity;
+        });
+        setCartTotal(total);
     }, [cartItems]);
 
     const addToCart = (item) => {

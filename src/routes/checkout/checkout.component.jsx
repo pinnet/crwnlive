@@ -32,9 +32,9 @@ const Checkout = () => {
             </div>
             {
             (cartItems.length === 0) ? <div className='empty-cart-message'>Your cart is empty</div> :
-             cartItems.map(item => <CheckoutItem key={item.id} cartItem={item} />)
+                cartItems.map(item => <CheckoutItem key={item.id} cartItem={item} />)
             }            
-            <div className='total'>Total ${cartTotal}</div>
+            <span className='total'>Total ${cartTotal}</span>
         </div>
         
         );
