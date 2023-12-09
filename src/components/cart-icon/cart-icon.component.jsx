@@ -14,6 +14,8 @@
  */
 
 import './cart-icon.styles.scss';
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/cart.context';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 
 /**
@@ -21,10 +23,10 @@ import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
  * @component
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
-const CartIcon = ({onClick}) => {
-    
+const CartIcon = () => {
+    const { isCartVisable, setCartVisable } = useContext(CartContext);
     return (
-        <div className='cart-icon-container' onClick={onClick}>
+        <div className='cart-icon-container' onClick={() => { setCartVisable(!isCartVisable) }}>
             <ShoppingIcon className='shopping-icon' />
             <span className='item-count'>0</span>
         </div>

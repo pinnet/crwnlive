@@ -20,8 +20,8 @@ import { createContext, useState } from 'react';
  * @property {Function} setItems - The function to update the cart items.
  */
 export const CartContext = createContext({
-    isVisable: false,
-    setVisable: () => {}
+    isCartVisable: false,
+    setCartVisable: () => {}
 });
 
 /**
@@ -31,10 +31,10 @@ export const CartContext = createContext({
  * @returns {JSX.Element} The rendered JSX element.
  */
 export const CartProvider = ({ children }) => {
-    const [isVisable, setVisable] = useState(false);
+    const [isCartVisable, setCartVisable] = useState(false);
 
     return (
-        <CartContext.Provider value={{ isVisable, setVisable }}>
+        <CartContext.Provider value={{ isCartVisable, setCartVisable }}>
             {children}
         </CartContext.Provider>
     );

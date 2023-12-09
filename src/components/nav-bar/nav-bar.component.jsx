@@ -26,8 +26,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const NavBar = () => {
-    const { isVisable, setVisable } = useContext(CartContext);
-    console.log('NavBar isVisable: ', isVisable);
+    const { isCartVisable } = useContext(CartContext);   
     const { currentUser} = useContext(UserContext);
     const  signOutHandler = async() => {
         await signUserOut();
@@ -48,11 +47,9 @@ const NavBar = () => {
                             <span><Link className='nav-link' to="/auth">Sign in</Link></span>
                         )
                     }
-                    <CartIcon onClick={()=>{setVisable(!isVisable)}}/>
+                    <CartIcon />
                 </div>
-                    {
-                        isVisable ? <CartDropdown /> : null
-                    }
+                    { isCartVisable && <CartDropdown /> }
             </div>
             <Outlet />
         </Fragment>
