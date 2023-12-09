@@ -78,7 +78,6 @@ export const CartProvider = ({ children }) => {
         setQuantity(quantity);
     }, [cartItems]);
 
-    console.log('cartItems', cartItems);
     const addToCart = (item) => {
         setCartItems(addItemToCartItems(cartItems, item));
     }
@@ -86,13 +85,12 @@ export const CartProvider = ({ children }) => {
         setCartItems(removeItemFromCartItems(cartItems, item));
     }
     const removeAllFromCart = (item) => {
+        console.log('removeAllFromCart', item);
         if (cartItems.length === 0) return;
-        if (!item){ 
-            setCartItems([])
-            return;
-        } else {
-            setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));
-        }        
+        setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));       
+    }
+    const clearCart = () => {
+        setCartItems([]);
     }
     console.log('cartItems', cartItems);
 
@@ -104,6 +102,7 @@ export const CartProvider = ({ children }) => {
             addToCart,
             removeFromCart,
             removeAllFromCart,
+            clearCart,
             quantity,
             cartTotal
         }}>{children}</CartContext.Provider>

@@ -5,7 +5,7 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 
 
 const Checkout = () => {
-    const { cartItems,setCartVisable} = useContext(CartContext);
+    const { cartItems,setCartVisable,cartTotal} = useContext(CartContext);
 
     useEffect(() => {
         setCartVisable(false);
@@ -36,8 +36,10 @@ const Checkout = () => {
             (cartItems.length === 0) ? <div className='empty-cart-message'>Your cart is empty</div> :
              cartItems.map(item => <CheckoutItem key={item.id} cartItem={item} />)
             }            
+            <div className='total'>Total ${cartTotal}</div>
         </div>
-    );
+        
+        );
 }
 
 export default Checkout;
