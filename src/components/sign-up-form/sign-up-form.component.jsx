@@ -7,7 +7,10 @@
  */
 
 import { useState} from 'react';
-import { createAuthUserFromEmailAndPassword } from '../../utils/firebase.utils';
+import { 
+    createAuthUserFromEmailAndPassword,
+    createUserDocumentFromGoogleAuth
+} from '../../utils/firebase.utils';
 import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -42,7 +45,8 @@ const SignUpForm = () => {
             return;
         }
         try {
-            await createAuthUserFromEmailAndPassword(email, password);
+            const { user } = await createAuthUserFromEmailAndPassword(email, password);
+            await createUserDocumentFromGoogleAuth(user, { displayName })
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
@@ -64,6 +68,7 @@ const SignUpForm = () => {
             </form>
         </div>
     );
+
 }
 
 export default SignUpForm;

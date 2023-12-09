@@ -8,21 +8,15 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  let isMounted = false;
   useEffect(() => {
-    if (!isMounted) {
-        // eslint-disable-next-line
-        isMounted = true;
-        const unsub = onAuthStateChangedListener((user) => {
-            if (user) {
-              createUserDocumentFromGoogleAuth(user)
-              setCurrentUser(user);
-            }
-            setCurrentUser(user);
-        });
-        console.log(unsub);
-    }
-  }, [isMounted]); 
+    const unsubscribe = onAuthStateChangedListener(async (user) => {
+      if (user) {
+        await createUserDocumentFromGoogleAuth(user);
+      }
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  },[]); 
 
 
   return (
