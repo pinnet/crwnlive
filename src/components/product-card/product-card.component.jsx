@@ -14,6 +14,7 @@ import CustomButton from '../custom-button/custom-button.component';
 const ProductCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
     const { name, price, imageUrl } = product;
+    const addToCartHandler = () => { addToCart(product); }   
     return (
         <div className='product-card-container'>    
             <img alt={name} className='img' src={imageUrl} />
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
               <span className='name'>{name}</span>
               <span className='price'>${price}</span>
             </div>
-            <CustomButton onClick={()=>{ addToCart(product)}} inverted='true' >Add to Cart</CustomButton>
+            <CustomButton onClick={addToCartHandler} inverted='true' >Add to Cart</CustomButton>
         </div>
     );
 }
