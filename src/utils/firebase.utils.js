@@ -1,12 +1,13 @@
-/*
- * firebase.utils.js
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+ * @file firebase.utils.js
+ * @description Utility functions for interacting with Firebase.
+ * @created Fri Dec 08 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @license MIT License
+ * @author Danny Arnold
+**/
 
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, query, getDoc, setDoc, collection, writeBatch, getDocs } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import {
     createUserWithEmailAndPassword,
@@ -37,6 +38,58 @@ provider.setCustomParameters({ prompt: 'select_account' });
  * @type {Firestore}
  */
 export const db = getFirestore();
+/**
+ * Gets the document reference for the specified collection and document id.
+ * @param {string} collectionKey - The key of the collection.
+ * @param {string} docId - The id of the document.
+ * @returns {DocumentReference} - The document reference.
+ */
+export const getDocumentRef = (collectionKey, docId) => doc(db, collectionKey, docId);
+/**
+ * Gets the document snapshot for the specified collection and document id.
+ * @param {string} collectionKey - The key of the collection.
+ * @param {string} docId - The id of the document.
+ * @returns {Promise<DocumentSnapshot>} - The document snapshot.
+ */
+export const getDocumentSnapshot = async (collectionKey, docId) => {
+    const docRef = getDocumentRef(collectionKey, docId);
+    return await getDoc(docRef);
+}
+
+/**
+ * Adds a collection of documents to Firestore database.
+ * 
+ * @param {string} collectionKey - The key of the collection to add documents to.
+ * @param {Array<Object>} objectsToAdd - An array of objects to add as documents.
+ * @returns {Promise<void>} - A promise that resolves when the documents are successfully added.
+ */
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+    objectsToAdd.forEach(obj => {
+        const newDocRef = doc(collectionRef, obj.title.toLowerCase());
+        batch.set(newDocRef, obj);
+    });
+    return await batch.commit();
+}
+
+/**
+ * Retrieves categories and documents from Firestore.
+ * @returns {Promise<Object>} A promise that resolves to an object containing categories and their associated documents.
+ */
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc,docSnapshot) => {
+        const { title, items } = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {});
+    return categoryMap;
+}
+
 /**
  * The authentication object for Firebase.
  * @type {Object}

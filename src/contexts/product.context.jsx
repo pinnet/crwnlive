@@ -9,9 +9,10 @@
  * Author: Danny Arnold
  */
 
-import { createContext, useState } from 'react';
-import SHOP_DATA from '../shop-data.json';
+import { createContext, useState,useEffect } from 'react';
+import { getCategoriesAndDocuments } from '../utils/firebase.utils';  
 
+//import SHOP_DATA from '../data/shop-data.js';
 /**
  * Context object for managing product data.
  * @type {Object}
@@ -19,7 +20,7 @@ import SHOP_DATA from '../shop-data.json';
  * @property {Function} setProducts - The function to update the products.
  */
 export const ProductContext = createContext({
-  products: SHOP_DATA,
+  products: [],
   setProducts: () => null
 });
 
@@ -30,7 +31,20 @@ export const ProductContext = createContext({
  * @returns {JSX.Element} The rendered component.
  */
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(SHOP_DATA);
+  const [products, setProducts] = useState([]);
+  let fetched = false;
+  useEffect(() => {
+    const getCategoryMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+      console.log(categoryMap);
+    }
+    if(!fetched) {
+      getCategoryMap();
+      //eslint-disable-next-line
+      fetched = true;
+    } 
+  }, [fetched]);
+
   return (
     <ProductContext.Provider value={{ products, setProducts }}>
       {children}
