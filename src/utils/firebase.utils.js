@@ -109,6 +109,19 @@ export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
 
 /**
  * Signs the user out.
- * @param {function} signUserOut - The signOut function from Firebase authentication.
+ * @returns {Promise<void>} A promise that resolves when the user is signed out.
  */
  export const signUserOut = async () => await signOut(auth);
+
+
+
+/**
+ * Registers an authentication state change listener.
+ * @param {function} callback - The callback function to be called when the authentication state changes.
+ * @throws {Error} If the callback is null.
+ * @returns {function} The unsubscribe function to stop listening for authentication state changes.
+ */
+export const onAuthStateChangedListener = (callback) => {
+    if (!callback) throw new Error('Callback is null');
+    return onAuthStateChanged(auth, callback);
+};

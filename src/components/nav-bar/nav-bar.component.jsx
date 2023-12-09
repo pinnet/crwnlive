@@ -17,10 +17,9 @@ import { UserContext } from '../../contexts/user.context';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const NavBar = () => {
-    const { currentUser,setCurrentUser } = useContext(UserContext);
+    const { currentUser} = useContext(UserContext);
     const  signOutHandler = async() => {
         await signUserOut();
-        setCurrentUser(null);
     }
     return (
         <Fragment>

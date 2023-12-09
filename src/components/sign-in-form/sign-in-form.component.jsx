@@ -6,15 +6,14 @@
  * Author: Danny Arnold
  */
 
-import { useState,useContext } from 'react';
+import { useState } from 'react';
 import './sign-in-form.styles.scss';
-import {UserContext} from '../../contexts/user.context';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { 
     signInWithGooglePopUp,
     createUserDocumentFromGoogleAuth,
-    signInWithEmailAndPasswordAuth,
+    signInWithEmailAndPasswordAuth    
  } from '../../utils/firebase.utils';
 
 const defaultFormState = {
@@ -27,10 +26,9 @@ const defaultFormState = {
  * @returns {JSX.Element} The sign-in form component.
  */
 const SignInForm = () => {
+
     const [formState, setFormState] = useState(defaultFormState);
     const { email, password } = formState;
-
-    const { setCurrentUser } = useContext(UserContext);
 
     const resetForm = () => {
         setFormState(defaultFormState);
@@ -44,9 +42,7 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { user } = await signInWithEmailAndPasswordAuth(email, password);
-            setCurrentUser(user);
-            console.log(user);
+            await signInWithEmailAndPasswordAuth(email, password);
             resetForm();
         } catch (error) {
             switch (error.code) {

@@ -6,13 +6,8 @@
  * Author: Danny Arnold
  */
 
-
-import { useState,useContext } from 'react';
-import {UserContext} from '../../contexts/user.context';
-import { 
-    createAuthUserFromEmailAndPassword,
-    createUserDocumentFromGoogleAuth
-} from '../../utils/firebase.utils';
+import { useState} from 'react';
+import { createAuthUserFromEmailAndPassword } from '../../utils/firebase.utils';
 import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -31,8 +26,7 @@ const defaultFormState = {
 const SignUpForm = () => {
     const [formState, setFormState] = useState(defaultFormState);
     const { displayName, email, password, confirmPassword } = formState;
-    const { setCurrentUser } = useContext(UserContext);
-
+    
     const resetForm = () => {
         setFormState(defaultFormState);
     };
@@ -48,9 +42,7 @@ const SignUpForm = () => {
             return;
         }
         try {
-            const { user } = await createAuthUserFromEmailAndPassword(email, password);
-            await createUserDocumentFromGoogleAuth(user, { displayName })
-            setCurrentUser(user);
+            await createAuthUserFromEmailAndPassword(email, password);
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
@@ -72,7 +64,6 @@ const SignUpForm = () => {
             </form>
         </div>
     );
-
 }
 
 export default SignUpForm;
