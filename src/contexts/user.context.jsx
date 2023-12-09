@@ -1,15 +1,13 @@
+/**
+ * @fileoverview Defines the UserContext and its initial values.
+ * @module UserContext
+ */
 /*
- * user.context.jsx
  * Created on Sat Dec 09 2023
  *
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
- /**
- * @fileoverview Defines the UserContext and its initial values.
- * @module UserContext
- */
-
 import { createContext,useState,useEffect } from 'react';
 import { onAuthStateChangedListener,createUserDocumentFromGoogleAuth} from '../utils/firebase.utils';
 

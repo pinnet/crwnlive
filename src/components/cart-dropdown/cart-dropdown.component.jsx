@@ -17,7 +17,6 @@ import CustomButton from '../custom-button/custom-button.component';
 
 /**
  * Renders a dropdown component for the cart.
- *
  * @returns {JSX.Element} The rendered CartDropdown component.
  */
 const CartDropdown = () => {

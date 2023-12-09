@@ -1,15 +1,19 @@
-/*
- * category-item.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
-
-import './category-item.styles.scss';
 
 /**
  * Renders a category item component.
+ *
+ * @component
+ * @param {Object} category - The category object.
+ * @param {string} category.title - The title of the category.
+ * @param {string} category.imageUrl - The URL of the category image.
+ * @returns {JSX.Element} The rendered category item component.
+ */
+import './category-item.styles.scss';
+
+
+/**
+ * Renders a category item component.
+ *
  * @param {Object} category - The category object containing title and imageUrl.
  * @returns {JSX.Element} The rendered category item component.
  */
