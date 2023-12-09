@@ -11,17 +11,17 @@
  */
 import { createContext, useState } from 'react';
 
-const addProductToCartItems = (cartItems, productToAdd) => {
-    const existingCartItem = cartItems.find(product => product.id === productToAdd.id);
+const addItemToCartItems = (cartItems, itemToAdd) => {
+    const existingCartItem = cartItems.find(item => item.id === itemToAdd.id);
     if (existingCartItem) {
-        return cartItems.map(product => {
-            return (product.id === productToAdd.id) ? 
-            { ...product, quantity: product.quantity + 1 } : 
-            product
+        return cartItems.map(item => {
+            return (item.id === itemToAdd.id) ? 
+            { ...item, quantity: item.quantity + 1 } : 
+            item
         });
     }
     else {
-        return [...cartItems, { ...productToAdd, quantity: 1 }];
+        return [...cartItems, { ...itemToAdd, quantity: 1 }];
     }
 };
 
@@ -49,8 +49,8 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     
     console.log('cartItems', cartItems);
-    const addToCart = (product) => {
-        setCartItems(addProductToCartItems(cartItems, product));
+    const addToCart = (item) => {
+        setCartItems(addItemToCartItems(cartItems, item));
     }
     console.log('cartItems', cartItems);
 
