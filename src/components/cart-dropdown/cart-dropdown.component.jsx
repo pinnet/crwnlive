@@ -11,7 +11,7 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
+import { Link } from 'react-router-dom';
 import './cart-dropdown.styles.scss'
 import { useContext } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
@@ -31,7 +31,8 @@ const CartDropdown = () => {
                     cartItems.map(item => <CartItem key={item.id} item={item} />)
                 }
             </div>
-            <CustomButton>GO TO CHECKOUT</CustomButton>
+            <Link className='cart-dropdown-link' to="/checkout">
+            <CustomButton>GO TO CHECKOUT</CustomButton></Link>
         </div>
     );
 }
