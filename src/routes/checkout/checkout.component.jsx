@@ -5,8 +5,10 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 
 
 const Checkout = () => {
-    const { cartItems,cartTotal} = useContext(CartContext);
-
+    const { cartItems,cartTotal,clearCart} = useContext(CartContext);
+    const clearCartHandler = () => {
+        clearCart();
+    };
    
     return (
         <div className='checkout-container'>
@@ -24,7 +26,7 @@ const Checkout = () => {
                 <div className='header-block'>
                     <span>Price</span>
                 </div>
-                <div className='header-block'>
+                <div className='header-block' onClick={clearCartHandler}>
                     <span>Remove</span>
                 </div>
             </div>
