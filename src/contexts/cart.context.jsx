@@ -9,9 +9,21 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
-
 import { createContext, useState } from 'react';
+
+const addProductToCartItems = (cartItems, productToAdd) => {
+    const existingCartItem = cartItems.find(product => product.id === productToAdd.id);
+    if (existingCartItem) {
+        return cartItems.map(product => {
+            return (product.id === productToAdd.id) ? 
+            { ...product, quantity: product.quantity + 1 } : 
+            product
+        });
+    }
+    else {
+        return [...cartItems, { ...productToAdd, quantity: 1 }];
+    }
+};
 
 /**
  * Context object for managing the cart.
@@ -21,7 +33,9 @@ import { createContext, useState } from 'react';
  */
 export const CartContext = createContext({
     isCartVisable: false,
-    setCartVisable: () => {}
+    setCartVisable: () => {},
+    cartItems: [],
+    addItemToCart: ()=>{}
 });
 
 /**
@@ -32,9 +46,16 @@ export const CartContext = createContext({
  */
 export const CartProvider = ({ children }) => {
     const [isCartVisable, setCartVisable] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
+    
+    console.log('cartItems', cartItems);
+    const addToCart = (product) => {
+        setCartItems(addProductToCartItems(cartItems, product));
+    }
+    console.log('cartItems', cartItems);
 
     return (
-        <CartContext.Provider value={{ isCartVisable, setCartVisable }}>
+        <CartContext.Provider value={{ isCartVisable, setCartVisable, cartItems, addToCart, }}>
             {children}
         </CartContext.Provider>
     );

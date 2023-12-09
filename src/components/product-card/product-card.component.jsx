@@ -7,9 +7,12 @@
  */
 
 import './product-card.styles.scss';
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/cart.context';
 import CustomButton from '../custom-button/custom-button.component';
 
 const ProductCard = ({ product }) => {
+    const { addToCart } = useContext(CartContext);
     const { name, price, imageUrl } = product;
     return (
         <div className='product-card-container'>    
@@ -18,7 +21,7 @@ const ProductCard = ({ product }) => {
               <span className='name'>{name}</span>
               <span className='price'>${price}</span>
             </div>
-            <CustomButton inverted='true' >Add to Cart</CustomButton>
+            <CustomButton onClick={()=>{ addToCart(product)}} inverted='true' >Add to Cart</CustomButton>
         </div>
     );
 }

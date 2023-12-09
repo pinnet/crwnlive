@@ -24,7 +24,7 @@ const Shop = () => {
             {
                 products.map(({ id, ...productData }) => (
                     <div key={id}>
-                        <ProductCard  product={productData}/>
+                        <ProductCard  product={{id,...productData}}/>
                     </div>
                 ))
             }
