@@ -1,9 +1,9 @@
 /**
- * @file FILEPATH: /home/danny/localdev/javascript/reactredux/crwn/src/components/nav-bar/nav-bar.component.jsx
+ * @file FILEPATH: /home/danny/localdev/javascript/reactredux/crwn/src/components/navigation/navigation.component.jsx
  * @description Renders the navigation bar component.
- * @module NavBar
+ * @module Navigation
  * @returns {JSX.Element} The rendered navigation bar.
- * @exports NavBar
+ * @exports Navigation
  */
 /*
  * Created on Sat Dec 09 2023
@@ -12,10 +12,10 @@
  * Author: Danny Arnold
  */
 
-import './nav-bar.styles.scss'
+import { NavigationContainer, LogoContainer, NavLinks, NavLink} from './navigation.styles'
 import { signUserOut } from '../../utils/firebase.utils';
 import { Fragment, useContext } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
@@ -25,7 +25,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * Renders the navigation bar component.
  * @returns {JSX.Element} The rendered navigation bar.
  */
-const NavBar = () => {
+const Navigation = () => {
     const { isCartVisable } = useContext(CartContext);   
     const { currentUser} = useContext(UserContext);
     const  signOutHandler = async() => {
@@ -33,26 +33,26 @@ const NavBar = () => {
     }
     return (
         <Fragment>
-            <div className="navigation">
-                <Link className='logo-container' to="/">
-                    <Logo className='logo' />
-                </Link>
-                <div className="nav-links-container">
-                    <Link className='nav-link' to="/">Home</Link>
-                    <Link className='nav-link' to="/shop">Shop</Link>
-                    <Link className='nav-link' to="/contact">Contact</Link>
+            <NavigationContainer>
+                <LogoContainer to="/">
+                    <Logo />
+                </LogoContainer>
+                <NavLinks>
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/shop">Shop</NavLink>
+                    <NavLink to="/contact">Contact</NavLink>
                     {
                         currentUser ? (
-                            <span className='nav-link' onClick={() => signOutHandler()}>Sign out</span>) : (
-                            <span><Link className='nav-link' to="/auth">Sign in</Link></span>
+                            <NavLink onClick={() => signOutHandler()}>Sign out</NavLink>) : (
+                            <NavLink to="/auth">Sign in</NavLink>
                         )
                     }
                     <CartIcon />
-                </div>
+                </NavLinks>
                     { isCartVisable && <CartDropdown /> }
-            </div>
+            </NavigationContainer>
             <Outlet />
         </Fragment>
     );
 }
-export default NavBar;
+export default Navigation;
