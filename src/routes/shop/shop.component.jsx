@@ -5,9 +5,10 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { useContext } from 'react';
-import { ProductProvider,ProductContext } from '../../contexts/product.context';
-import ProductCard from '../../components/product-card/product-card.component';
+import { useContext,Fragment } from 'react';
+import { CategoriesContext } from '../../contexts/categories.context';
+import CategoryPreview from '../../components/category-preview/category-preview.component';
+//import ProductCard from '../../components/product-card/product-card.component';
 import './shop.styles.scss';
 
 /**
@@ -15,21 +16,18 @@ import './shop.styles.scss';
  * @returns {JSX.Element} The rendered Shop component.
  */
 const Shop = () => {
-    const { products } = useContext(ProductContext);
+    const { categoriesMap } = useContext(CategoriesContext);
     return (
-    <div>
-        <h1>Shop</h1>
-        <div className='products-container'>
-        <ProductProvider>
-            {
-                products.map(({ id, ...productData }) => (
-                    <div key={id}>
-                        <ProductCard  product={{id,...productData}}/>
-                    </div>
-                ))
-            }
-        </ProductProvider>
-        </div>
+    <div className='shop-container'>
+    {
+        Object.keys(categoriesMap).map(title => {
+            const products = categoriesMap[title];
+            return (
+                <Fragment key={title}>
+                    <CategoryPreview tile={title} products={products} />
+                </Fragment>
+        )})
+    }
     </div>
 )};
 
