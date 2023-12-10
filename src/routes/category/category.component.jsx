@@ -21,7 +21,7 @@ const Category = () => {
     return (
         <>
             <Link className="back-link" to="/shop">Back</Link>
-            <h1 className="title">{title}</h1>
+            <h1 className="category-title">{title}</h1>
             <div className="category-route-container">
             {
                 products && products.map((product) => <ProductCard key={product.id} product={ product } />)
