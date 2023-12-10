@@ -15,6 +15,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import { UserProvider } from './contexts/user.context';
 import { CartProvider } from './contexts/cart.context';
+import { CategoriesProvider } from './contexts/categories.context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -23,11 +24,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </UserProvider>
+      <CategoriesProvider>
+        <UserProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </UserProvider>
+        </CategoriesProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
