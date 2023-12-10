@@ -10,7 +10,6 @@
  */
 import { BackgroundImage, Body, DirectoryItemContainer, } from './directory-item.styles';
 
-
 /**
  * Renders a category item component.
  *
@@ -19,7 +18,7 @@ import { BackgroundImage, Body, DirectoryItemContainer, } from './directory-item
  */
 const DirectoryItem = ({ category: { title, imageUrl } }) => (
     <DirectoryItemContainer>
-        <BackgroundImage/>
+        <BackgroundImage imageUrl={imageUrl}/>
         <Body>
             <h2>{title}</h2>
             <p>Shop now</p>
