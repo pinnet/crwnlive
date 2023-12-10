@@ -9,8 +9,38 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { createContext, useState,useEffect } from 'react';
+import { createContext, useReducer } from 'react';
 
+export const CART_ACTION_TYPES = {
+    UPDATE_CART: 'UPDATE_CART',
+    IS_CART_VISABLE: 'IS_CART_VISABLE'
+  }
+  
+  const cartReducer = (state,action) => {
+  
+    const { type, payload } = action;
+    console.log('cartReducer', type, payload);
+    switch(type) {
+        case CART_ACTION_TYPES.UPDATE_CART:
+            return {
+                ...state,
+                ...payload
+            };
+        case CART_ACTION_TYPES.IS_CART_VISABLE:
+            return {
+                ...state,
+                isCartOpen: payload
+            };        
+      default:
+        throw new Error(`Unhandled action type: ${type}`);
+    }
+  
+  }
+const INITIAL_STATE = {
+    cartItems: [],
+    quantity: 0,
+    cartTotal: 0
+};
 const addItemToCartItems = (cartItems, itemToAdd) => {
     const existingCartItem = cartItems.find(item => item.id === itemToAdd.id);
     if (existingCartItem) {
@@ -45,14 +75,10 @@ const removeItemFromCartItems = (cartItems, itemToRemove) => {
  * @property {Function} setItems - The function to update the cart items.
  */
 export const CartContext = createContext({
-    isCartVisable: false,
-    setCartVisable: () => {},
+    isCartOpen: false,
     cartItems: [],
-    addItemToCart: ()=>{},
     quanty: 0,
-    setQuantity: ()=>{},
-    cartTotal: 0,
-    setCartTotal: ()=>{}
+    cartTotal: 0
 });
 
 /**
@@ -62,51 +88,59 @@ export const CartContext = createContext({
  * @returns {JSX.Element} The rendered JSX element.
  */
 export const CartProvider = ({ children }) => {
-    const [isCartVisable, setCartVisable] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [quantity, setQuantity] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
+  
+    const[ { isCartOpen, cartItems, quantity, cartTotal } , dispatch ] = useReducer(cartReducer, INITIAL_STATE);
 
-    useEffect(() => {
-        let quantity = 0;
-        cartItems.forEach(item => {
-            quantity += item.quantity;
+    const updateCartItemsReducer = (newCartItems) => {
+        
+        const newQuantity = newCartItems.reduce((accumulatedQuantity, cartItem) => 
+            accumulatedQuantity + cartItem.quantity, 0);
+        const newCartTotal = newCartItems.reduce((accumulatedTotal, cartItem) => 
+            accumulatedTotal + cartItem.itemTotal, 0);
+        dispatch({
+            type: CART_ACTION_TYPES.UPDATE_CART,
+            payload: {
+                cartItems: newCartItems,
+                quantity: newQuantity,
+                cartTotal: newCartTotal
+            }
         });
-        setQuantity(quantity);
-    }, [cartItems]);
-
-    useEffect(() => {
-        let total = 0;
-        cartItems.forEach(item => {
-            total += item.price * item.quantity;
-        });
-        setCartTotal(total);
-    }, [cartItems]);
-
-    const addToCart = (item) => {
-        setCartItems(addItemToCartItems(cartItems, item));
+    } 
+    const addItemToCart = (item) => {
+        const newCartItems = addItemToCartItems(cartItems, item);
+        updateCartItemsReducer(newCartItems);
     }
-    const removeFromCart = (item) => {
-        setCartItems(removeItemFromCartItems(cartItems, item));
+    const removeItemFromCart = (item) => {
+        const newCartItems = removeItemFromCartItems(cartItems, item);
+        updateCartItemsReducer(newCartItems);
     }
     const removeAllFromCart = (item) => {
-        if (cartItems.length === 0) return;
-        setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));       
+        const newCartItems = cartItems.filter(cartItem => cartItem.id !== item.id);
+        updateCartItemsReducer(newCartItems);
     }
     const clearCart = () => {
-        setCartItems([]);
+        const newCartItems = [];
+        updateCartItemsReducer(newCartItems);
     }
+
+    const setCartVisable = (visable) => {
+        console.log('setCartVisable', visable);
+        dispatch({
+            type: CART_ACTION_TYPES.IS_CART_VISABLE,
+            payload: visable
+        });
+    }   
     return (
         <CartContext.Provider value={{ 
-            isCartVisable,
-            setCartVisable,
+            isCartOpen,
+            quantity,
+            cartTotal,
             cartItems,
-            addToCart,
-            removeFromCart,
+            setCartVisable,
+            addItemToCart,
+            removeItemFromCart,
             removeAllFromCart,
             clearCart,
-            quantity,
-            cartTotal
         }}>{children}</CartContext.Provider>
     );
 }

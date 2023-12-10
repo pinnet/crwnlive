@@ -23,9 +23,9 @@ import { CartContext } from '../../contexts/cart.context';
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
 const CartIcon = () => {
-    const { isCartVisable, setCartVisable,quantity } = useContext(CartContext);
+    const { isCartOpen, setCartVisable,quantity } = useContext(CartContext);
     return (
-        <CartIconContainer onClick={() => { setCartVisable(!isCartVisable) }}>
+        <CartIconContainer onClick={() => { setCartVisable(!isCartOpen) }}>
             <ShoppingIcon />
             <ItemCount>{quantity}</ItemCount>
         </CartIconContainer>

@@ -12,9 +12,9 @@ import { CartContext } from '../../contexts/cart.context';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 const ProductCard = ({ product }) => {
-    const { addToCart } = useContext(CartContext);
+    const { addItemToCart } = useContext(CartContext);
     const { name, price, imageUrl } = product;
-    const addToCartHandler = () => { addToCart(product); }   
+    const addToCartHandler = () => { addItemToCart(product); }   
     return (
         <ProductCartContainer>    
             <img alt={name} src={imageUrl} />

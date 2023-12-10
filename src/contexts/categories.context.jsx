@@ -11,7 +11,7 @@
  * Author: Danny Arnold
  */
 
-import { createContext, useState,useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { getCategoriesAndDocuments } from '../utils/firebase.utils';  
 
 //import SHOP_DATA from '../data/shop-data.js';
