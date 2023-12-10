@@ -23,7 +23,6 @@ const FormInput = ({ handleChange, label, ...otherProps }) => (
         {
             label ? (<FormInputLabel srink={otherProps.value.length}>{label}</FormInputLabel>) : null
         }
-
     </Group>
 )
 export default FormInput;
