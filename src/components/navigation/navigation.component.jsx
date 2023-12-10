@@ -26,7 +26,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const Navigation = () => {
-    const { isCartVisable } = useContext(CartContext);   
+    const { isCartOpen } = useContext(CartContext);   
     const { currentUser} = useContext(UserContext);
     const  signOutHandler = async() => {
         await signUserOut();
@@ -49,7 +49,7 @@ const Navigation = () => {
                     }
                     <CartIcon />
                 </NavLinks>
-                    { isCartVisable && <CartDropdown /> }
+                    { isCartOpen && <CartDropdown /> }
             </NavigationContainer>
             <Outlet />
         </Fragment>

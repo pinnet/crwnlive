@@ -19,7 +19,7 @@ const Directory = () => {
         <DirectoryContainer>
             { 
                 directory.map((category) => (
-                    <DirectoryItem category={category} />
+                    <DirectoryItem key ={ category.id } category={category} />
                 ))
             }
         </DirectoryContainer>
