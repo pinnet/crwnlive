@@ -21,7 +21,7 @@ const FormInput = ({ handleChange, label, ...otherProps }) => (
     <Group>
         <Input onChange={handleChange} {...otherProps} />
         {
-            label ? (<FormInputLabel srink={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>{label}</FormInputLabel>) : null
+            label ? (<FormInputLabel srink={otherProps.value.length}>{label}</FormInputLabel>) : null
         }
 
     </Group>
