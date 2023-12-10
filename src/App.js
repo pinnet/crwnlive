@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import setCurrentUser from './store/user/user.actions';
+import { setCurrentUser } from './store/user/user.actions';
 import { onAuthStateChangedListener, createUserDocumentFromGoogleAuth } from './utils/firebase.utils';
 import Navigation from './components/navigation/navigation.component';
 import Home from './routes/home/home.component';
