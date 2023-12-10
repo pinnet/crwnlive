@@ -13,10 +13,9 @@
  * Author: Danny Arnold
  */
 
-import { CartIconContainer, ItemCount } from './cart-icon.styles';
+import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/cart.context';
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 
 /**
  * Represents a cart icon component.
@@ -27,7 +26,7 @@ const CartIcon = () => {
     const { isCartVisable, setCartVisable,quantity } = useContext(CartContext);
     return (
         <CartIconContainer onClick={() => { setCartVisable(!isCartVisable) }}>
-            <ShoppingIcon className='shopping-icon' />
+            <ShoppingIcon />
             <ItemCount>{quantity}</ItemCount>
         </CartIconContainer>
     );
