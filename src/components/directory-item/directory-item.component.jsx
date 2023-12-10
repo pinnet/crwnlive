@@ -9,21 +9,26 @@
  * @returns {JSX.Element} The rendered category item component.
  */
 import { BackgroundImage, Body, DirectoryItemContainer, } from './directory-item.styles';
-
+import { useNavigate } from 'react-router-dom';
 /**
  * Renders a category item component.
  *
  * @param {Object} category - The category object containing title and imageUrl.
  * @returns {JSX.Element} The rendered category item component.
  */
-const DirectoryItem = ({ category: { title, imageUrl } }) => (
-    <DirectoryItemContainer>
+const DirectoryItem = ({ category: { title, imageUrl } }) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => { navigate(`/shop/${title}`) };
+
+    return(
+    <DirectoryItemContainer onClick={handleClick}>
         <BackgroundImage imageUrl={imageUrl}/>
         <Body>
             <h2>{title}</h2>
             <p>Shop now</p>
         </Body>
     </DirectoryItemContainer>
-);
+)};
 
 export default DirectoryItem;
