@@ -14,7 +14,7 @@
 import { useNavigate } from 'react-router-dom';
 import './cart-dropdown.styles.scss'
 import { useContext } from 'react';
-import CustomButton from '../custom-button/custom-button.component';
+import Button from '../button/button.component';
 import { CartContext } from '../../contexts/cart.context';
 import CartItem from '../cart-item/cart-item.component';
 
@@ -42,7 +42,7 @@ const CartDropdown = () => {
                 }
             </div>
             
-            <CustomButton onClick={goToCheckout}>GO TO CHECKOUT</CustomButton>
+            <Button onClick={goToCheckout}>GO TO CHECKOUT</Button>
         </div>
     );
 }

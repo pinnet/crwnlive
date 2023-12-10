@@ -13,7 +13,7 @@ import {
 } from '../../utils/firebase.utils';
 import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import Button from '../button/button.component';
 
 const defaultFormState = {
     displayName: '',
@@ -64,7 +64,7 @@ const SignUpForm = () => {
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
                 <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,12}' title='minimum 8 characters' value={password} autoComplete='new-password' />
                 <FormInput handleChange={handleChange} label='Confirm Password' required type="password" name='confirmPassword' value={confirmPassword} autoComplete='new-password' />
-                <CustomButton type="submit" >Sign Up</CustomButton>
+                <Button type="submit" >Sign Up</Button>
             </form>
         </div>
     );

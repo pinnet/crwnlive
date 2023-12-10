@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import './sign-in-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import  Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { 
     signInWithGooglePopUp,
     createUserDocumentFromGoogleAuth,
@@ -83,8 +83,8 @@ const SignInForm = () => {
                 <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
                 <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,22}' title='minimum 8 characters' value={password} autoComplete='current-password' />
                 <div className='buttons-container'>
-                    <CustomButton type="submit" >Sign In</CustomButton>
-                    <CustomButton type="button" buttonType='google' onClick={signInWithGoogle} >Google Sign In</CustomButton>
+                    <Button type="submit" >Sign In</Button>
+                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle} >Google Sign In</Button>
                 </div>
             </form>
         </div>
