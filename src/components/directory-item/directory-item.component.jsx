@@ -8,7 +8,7 @@
  * @param {string} category.imageUrl - The URL of the category image.
  * @returns {JSX.Element} The rendered category item component.
  */
-import './category-item.styles.scss';
+import './directory-item.styles.scss';
 
 
 /**
@@ -17,14 +17,14 @@ import './category-item.styles.scss';
  * @param {Object} category - The category object containing title and imageUrl.
  * @returns {JSX.Element} The rendered category item component.
  */
-const CategoryItem = ({ category: { title, imageUrl } }) => (
-    <div className="category-container">
+const DirectoryItem = ({ category: { title, imageUrl } }) => (
+    <div className="directory-item-container">
         <div className='background-image' style={{ backgroundImage: `url(${imageUrl})` }} />
-        <div className="category-body-container">
+        <div className="directory-item-body">
             <h2>{title}</h2>
             <p>Shop now</p>
         </div>
     </div>
 );
 
-export default CategoryItem;
+export default DirectoryItem;
