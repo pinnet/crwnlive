@@ -11,12 +11,7 @@ import Directory from '../../components/directory/directory.component';
  * Renders the Home component.
  * @returns {JSX.Element} The rendered Home component.
  */
-const Home = () => {
-
-    return (
-
-        <Directory />
-    )
-
-}
+const Home = () => (
+    <Directory />
+    );
 export default Home;
