@@ -5,7 +5,7 @@
  * Author: Danny Arnold
  */
 
-import './cart-item.styles.scss';
+import { CartItemContainer, ItemDetails} from './cart-item.styles';
 
 /**
  * Renders a cart item component.
@@ -20,13 +20,13 @@ import './cart-item.styles.scss';
  */
 const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
     return (
-        <div className='cart-item-container'>
+        <CartItemContainer>
             <img alt={name} className='img' src={imageUrl} />
-            <div className='item-details'>
+            <ItemDetails>
                 <span className='name'>{name}</span>
                 <span className='price'>{quantity} x ${price}</span>
-            </div>
-        </div>
+            </ItemDetails>
+        </CartItemContainer>
     );
 }
 
