@@ -9,8 +9,68 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { createContext, useState,useEffect } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 
+export const CART_ACTION_TYPES = {
+    SET_CART_VISABLE: 'SET_CART_VISABLE',
+    ADD_ITEM_TO_CART: 'ADD_ITEM_TO_CART',
+    REMOVE_ITEM_FROM_CART: 'REMOVE_ITEM_FROM_CART',
+    CLEAR_CART: 'CLEAR_CART',
+    REMOVE_ALL_FROM_CART: 'REMOVE_ALL_FROM_CART',
+    SET_CART_TOTAL: 'SET_CART_TOTAL',
+    SET_QUANTITY: 'SET_QUANTITY'
+  }
+  
+  const cartReducer = (state,action) => {
+  
+    const { type, payload } = action;
+    switch(type) {
+        case CART_ACTION_TYPES.SET_CART_VISABLE:
+            return {
+                ...state,
+                isCartVisable: payload
+            }
+        case CART_ACTION_TYPES.ADD_ITEM_TO_CART:
+            return {
+                ...state,
+                cartItems: addItemToCartItems(state.cartItems, payload)
+            }
+        case CART_ACTION_TYPES.REMOVE_ITEM_FROM_CART:
+            return {
+                ...state,
+                cartItems: removeItemFromCartItems(state.cartItems, payload)
+            }
+        case CART_ACTION_TYPES.REMOVE_ALL_FROM_CART:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(cartItem => cartItem.id !== payload.id)
+            }
+        case CART_ACTION_TYPES.CLEAR_CART:
+            return {
+                ...state,
+                cartItems: []
+            }
+        case CART_ACTION_TYPES.SET_CART_TOTAL:
+            return {
+                ...state,
+                cartTotal: payload
+            }
+        case CART_ACTION_TYPES.SET_QUANTITY:
+            return {
+                ...state,
+                quantity: payload
+            }
+      default:
+        throw new Error(`Unhandled action type: ${type}`);
+    }
+  
+  }
+const INITIAL_STATE = {
+    isCartVisable: false,
+    cartItems: [],
+    quantity: 0,
+    cartTotal: 0
+};
 const addItemToCartItems = (cartItems, itemToAdd) => {
     const existingCartItem = cartItems.find(item => item.id === itemToAdd.id);
     if (existingCartItem) {
@@ -62,11 +122,51 @@ export const CartContext = createContext({
  * @returns {JSX.Element} The rendered JSX element.
  */
 export const CartProvider = ({ children }) => {
-    const [isCartVisable, setCartVisable] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [quantity, setQuantity] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
+  
+    const[ { isCartVisable, cartItems, quantity, cartTotal } , dispatch ] = useReducer(cartReducer, INITIAL_STATE);
 
+    const setCartVisable = (visable) => {
+        dispatch({
+            type: CART_ACTION_TYPES.SET_CART_VISABLE,
+            payload: visable
+        });
+    }
+    const setQuantity = (quantity) => {
+        dispatch({
+            type: CART_ACTION_TYPES.SET_QUANTITY,
+            payload: quantity
+        });
+    }
+    const setCartTotal = (total) => {
+        dispatch({
+            type: CART_ACTION_TYPES.SET_CART_TOTAL,
+            payload: total
+        });
+    }
+    const addItemToCart = (item) => {
+        dispatch({
+            type: CART_ACTION_TYPES.ADD_ITEM_TO_CART,
+            payload: item
+        });
+    }
+    const removeItemFromCart = (item) => {
+        dispatch({
+            type: CART_ACTION_TYPES.REMOVE_ITEM_FROM_CART,
+            payload: item
+        });
+    }
+    const removeAllFromCart = (item) => {
+        dispatch({
+            type: CART_ACTION_TYPES.REMOVE_ALL_FROM_CART,
+            payload: item
+        });
+    }
+    const clearCart = () => {
+        dispatch({
+            type: CART_ACTION_TYPES.CLEAR_CART
+        });
+    }
+        
     useEffect(() => {
         let quantity = 0;
         cartItems.forEach(item => {
@@ -83,30 +183,17 @@ export const CartProvider = ({ children }) => {
         setCartTotal(total);
     }, [cartItems]);
 
-    const addToCart = (item) => {
-        setCartItems(addItemToCartItems(cartItems, item));
-    }
-    const removeFromCart = (item) => {
-        setCartItems(removeItemFromCartItems(cartItems, item));
-    }
-    const removeAllFromCart = (item) => {
-        if (cartItems.length === 0) return;
-        setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));       
-    }
-    const clearCart = () => {
-        setCartItems([]);
-    }
     return (
         <CartContext.Provider value={{ 
             isCartVisable,
-            setCartVisable,
+            quantity,
+            cartTotal,
             cartItems,
-            addToCart,
-            removeFromCart,
+            setCartVisable,
+            addItemToCart,
+            removeItemFromCart,
             removeAllFromCart,
             clearCart,
-            quantity,
-            cartTotal
         }}>{children}</CartContext.Provider>
     );
 }

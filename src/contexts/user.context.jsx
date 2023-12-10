@@ -8,7 +8,7 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { createContext,useState,useEffect } from 'react';
+import { createContext,useEffect,useReducer } from 'react';
 import { onAuthStateChangedListener,createUserDocumentFromGoogleAuth} from '../utils/firebase.utils';
 
 /**
@@ -22,6 +22,27 @@ export const UserContext = createContext({
   setCurrentUser: () => null
 });
 
+export const USER_ACTION_TYPES = {
+  SET_CURRENT_USER: 'SET_CURRENT_USER'
+}
+
+const userReducer = (state,action) => {
+
+  const { type, payload } = action;
+  switch(type) {
+    case USER_ACTION_TYPES.SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: payload
+      }
+    default:
+      throw new Error(`Unhandled action type: ${type}`);
+  }
+
+}
+const INITIAL_STATE = {
+  currentUser: null
+};
 /**
  * UserProvider component that provides user context to its children.
  * @param {Object} props - The component props.
@@ -29,8 +50,14 @@ export const UserContext = createContext({
  * @returns {JSX.Element} The UserProvider component.
  */
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const[ { currentUser } , dispatch ] = useReducer(userReducer, INITIAL_STATE);
 
+  const setCurrentUser = (user) => {
+    dispatch({
+      type: USER_ACTION_TYPES.SET_CURRENT_USER,
+      payload: user
+    });
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(async (user) => {
       if (user) {
