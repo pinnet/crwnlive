@@ -13,7 +13,7 @@
  * Author: Danny Arnold
  */
 
-import './cart-icon.styles.scss';
+import { CartIconContainer, ItemCount } from './cart-icon.styles';
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/cart.context';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
@@ -26,10 +26,10 @@ import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 const CartIcon = () => {
     const { isCartVisable, setCartVisable,quantity } = useContext(CartContext);
     return (
-        <div className='cart-icon-container' onClick={() => { setCartVisable(!isCartVisable) }}>
+        <CartIconContainer onClick={() => { setCartVisable(!isCartVisable) }}>
             <ShoppingIcon className='shopping-icon' />
-            <span className='item-count'>{quantity}</span>
-        </div>
+            <ItemCount>{quantity}</ItemCount>
+        </CartIconContainer>
     );
 }
 
