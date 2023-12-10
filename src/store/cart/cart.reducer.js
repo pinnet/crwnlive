@@ -1,19 +1,15 @@
-export const CART_ACTION_TYPES = {
-    UPDATE_CART: 'UPDATE_CART',
-    IS_CART_VISABLE: 'IS_CART_VISABLE'
-  }
+import { CART_ACTION_TYPES } from './cart.types';
   
 export const cartReducer = ( state = INITIAL_STATE, action) => {
   
     const { type, payload } = action;
-    console.log('cartReducer', type, payload);
     switch(type) {
-        case CART_ACTION_TYPES.UPDATE_CART:
+        case CART_ACTION_TYPES.SET_CART_ITEMS:
             return {
                 ...state,
-                ...payload
+                cartItems: payload
             };
-        case CART_ACTION_TYPES.IS_CART_VISABLE:
+        case CART_ACTION_TYPES.SET_CART_OPEN:
             return {
                 ...state,
                 isCartOpen: payload
@@ -24,6 +20,7 @@ export const cartReducer = ( state = INITIAL_STATE, action) => {
   
   }
 const INITIAL_STATE = {
+    isCartOpen: false,
     cartItems: [],
     quantity: 0,
     cartTotal: 0
