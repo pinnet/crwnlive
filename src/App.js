@@ -7,6 +7,7 @@
  */
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import setCurrentUser from './store/user/user.actions';
 import { onAuthStateChangedListener, createUserDocumentFromGoogleAuth } from './utils/firebase.utils';
@@ -22,15 +23,17 @@ import Checkout from './routes/checkout/checkout.component.jsx';
  * @returns {JSX.Element} The rendered App component.
  */
 const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(async (user) => {
       if (user) {
         await createUserDocumentFromGoogleAuth(user);
       }
-      setCurrentUser(user);
+      dispatch(setCurrentUser(user));
     });
     return unsubscribe;
-  },[]); 
+  },[dispatch]); 
 
   return (
     <Routes>
