@@ -12,31 +12,21 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { useDispatch, useSelector } from 'react-redux';
-
-import { setIsCartOpen } from '../../store/cart/cart.actions';
-import { selectIsCartOpen,selectCartItems } from '../../store/cart/cart.selector';
 import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
-import { useEffect } from 'react';
-
 /**
  * Represents a cart icon component.
  * @component
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
 const CartIcon = () => {
-    let isCartOpen = useSelector(selectIsCartOpen);
-    const dispatch = useDispatch();
-    
-    useEffect(() => {
-        dispatch(setIsCartOpen(isCartOpen));
-    },[isCartOpen,dispatch]);
+    let quantity = 0;
+    let isCartOpen = false;
 
     const toggleCart = () => {
         console.log('toggleCart');
         isCartOpen  = !isCartOpen;
     }
-    const { quantity } = useSelector(selectCartItems);
+    
     return (
         <CartIconContainer onClick={toggleCart}>
             <ShoppingIcon />

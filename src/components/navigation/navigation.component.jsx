@@ -13,7 +13,7 @@
  */
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/user/user.selector';
-import { selectIsCartOpen } from '../../store/cart/cart.selector';
+//import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { NavigationContainer, LogoContainer, NavLinks, NavLink} from './navigation.styles'
 import { signUserOut } from '../../utils/firebase.utils';
 import { Fragment } from 'react';
@@ -27,7 +27,8 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const Navigation = () => {
-    const isCartOpen = useSelector(selectIsCartOpen);  
+    //const isCartOpen = useSelector(selectIsCartOpen); 
+    let isCartOpen = false; 
     const currentUser = useSelector(selectCurrentUser);
     const  signOutHandler = async() => {
         await signUserOut();
