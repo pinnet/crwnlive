@@ -8,12 +8,19 @@ export const cartReducer = ( state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 cartItems: payload
+            };
+        case CART_ACTION_TYPES.SET_CART_OPEN:
+            return {
+                ...state,
+                cartOpen: payload
             };       
       default:
         return state;
     }
-  
   }
 const INITIAL_STATE = {
-    cartItems: []
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0,
+    cartOpen: false
 };

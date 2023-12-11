@@ -12,6 +12,7 @@
  * Author: Danny Arnold
  */
 import { useSelector } from 'react-redux';
+import { selectCartOpen } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { NavigationContainer, LogoContainer, NavLinks, NavLink} from './navigation.styles'
 import { signUserOut } from '../../utils/firebase.utils';
@@ -26,7 +27,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const Navigation = () => {
-    let isCartOpen = true; 
+    const isCartOpen = useSelector(selectCartOpen);
     const currentUser = useSelector(selectCurrentUser);
     const  signOutHandler = async() => {
         await signUserOut();
