@@ -13,18 +13,22 @@
  * Author: Danny Arnold
  */
 import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
+import { useDispatch,useSelector } from 'react-redux';
+import { selectCartItemsCount, selectCartOpen } from '../../store/cart/cart.selector';
+import { setCartOpen } from '../../store/cart/cart.actions';
+
 /**
  * Represents a cart icon component.
  * @component
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
 const CartIcon = () => {
-    let quantity = 0;
-    let isCartOpen = false;
-
+    const dispatch = useDispatch();
+    const isCartOpen = useSelector(selectCartOpen);
+    const quantity = useSelector(selectCartItemsCount);
+    
     const toggleCart = () => {
-        console.log('toggleCart');
-        isCartOpen  = !isCartOpen;
+        dispatch(setCartOpen(!isCartOpen));
     }
     
     return (

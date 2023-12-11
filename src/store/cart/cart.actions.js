@@ -2,6 +2,9 @@ import { createAction } from '../../utils/reducer/reducer.utils';
 import { addItemToCartItems, removeItemFromCartItems } from '../../utils/cart/cart.actions.utils';
 import { CART_ACTION_TYPES } from './cart.types';
 
+export const setCartOpen = (open) => {
+  return createAction(CART_ACTION_TYPES.SET_CART_OPEN,open);
+}
 export const addItemToCart = (currentState, item) => {
   const newCartItems = addItemToCartItems(currentState, item);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
