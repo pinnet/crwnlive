@@ -19,21 +19,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-/*
-const loggerMiddleware = (store) => (next) => (action) => {
-    if(!action.type) {
-        return next(action);
-    }
-    console.log('type:', action.type);
-    console.log('payload:', action.payload);
-    console.log('current state', store.getState())
-    const result = next(action);
-    console.log('next state', store.getState());
-    return result;
-  };
-*/
-
-const middlewares = [logger];
+const middlewares = [process.env.NODE_ENV === 'development' &&  logger].filter(Boolean);
 
 const composeEnhancers = compose(applyMiddleware( ...middlewares ));
 
