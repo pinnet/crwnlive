@@ -33,7 +33,8 @@ const App = () => {
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
-  },[dispatch]); 
+  },[dispatch]);
+  
 
   return (
     <Routes>
