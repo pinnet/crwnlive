@@ -11,7 +11,7 @@ import directory from '../../data/directory-data';
 
 /**
  * Renders a directory component.
- * @param {Object[]} categories - An array of directory objects.
+ * @param {Object[]} directory - An array of directory objects.
  * @returns {JSX.Element} The rendered directory component.
  */
 const Directory = () => {

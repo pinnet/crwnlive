@@ -5,16 +5,20 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
+import { useDispatch,useSelector } from 'react-redux';
+import { addItemToCart } from '../../store/cart/cart.actions';
+import { selectCartItems } from '../../store/cart/cart.selector';
 import { ProductCartContainer, Footer, Name, Price } from './product-card.styles';
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 const ProductCard = ({ product }) => {
-    const { addItemToCart } = useContext(CartContext);
+    const dispatch = useDispatch();
+    const currentCartItems = useSelector(selectCartItems);
     const { name, price, imageUrl } = product;
-    const addToCartHandler = () => { addItemToCart(product); }   
+    const addToCartHandler = () => { 
+        dispatch(addItemToCart(currentCartItems,product));
+    }   
     return (
         <ProductCartContainer>    
             <img alt={name} src={imageUrl} />

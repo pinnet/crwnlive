@@ -11,11 +11,11 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
 import { useNavigate } from 'react-router-dom';
-import { CartDropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.styles'
-import { useContext } from 'react';
+import { CartDropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.styles';
 import Button from '../button/button.component';
-import { CartContext } from '../../contexts/cart.context';
 import CartItem from '../cart-item/cart-item.component';
 
 /**
@@ -23,17 +23,12 @@ import CartItem from '../cart-item/cart-item.component';
  * @returns {JSX.Element} The rendered CartDropdown component.
  */
 const CartDropdown = () => {
-    
-    const { setCartVisable } = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
     const navigate = useNavigate();
-    
     const goToCheckout = () => {
-        setCartVisable(false);
         navigate('/checkout');
     }
 
-
-    const { cartItems } = useContext(CartContext);
     return (
         <CartDropdownContainer>
             <CartItems>

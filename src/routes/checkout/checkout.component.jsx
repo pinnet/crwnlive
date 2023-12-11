@@ -11,10 +11,9 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
+import { useSelector } from 'react-redux';
+import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles';
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 /**
@@ -22,10 +21,9 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
  * @returns {JSX.Element} The rendered Checkout component.
  */
 const Checkout = () => {
-    const { cartItems,cartTotal,clearCart} = useContext(CartContext);
-    const clearCartHandler = () => {
-        clearCart();
-    };
+
+    const cartItems = useSelector(selectCartItems);
+    const cartTotal = useSelector(selectCartTotal);
    
     return (
         <CheckoutContainer>
@@ -43,7 +41,7 @@ const Checkout = () => {
                 <HeaderBlock>
                     <span>Price</span>
                 </HeaderBlock>
-                <HeaderBlock onClick={clearCartHandler}>
+                <HeaderBlock>
                     <span>Remove</span>
                 </HeaderBlock>
             </CheckoutHeader>

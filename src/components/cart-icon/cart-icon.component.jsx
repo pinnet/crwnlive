@@ -12,20 +12,23 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-
 import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
-
 /**
  * Represents a cart icon component.
  * @component
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
 const CartIcon = () => {
-    const { isCartOpen, setCartVisable,quantity } = useContext(CartContext);
+    let quantity = 0;
+    let isCartOpen = false;
+
+    const toggleCart = () => {
+        console.log('toggleCart');
+        isCartOpen  = !isCartOpen;
+    }
+    
     return (
-        <CartIconContainer onClick={() => { setCartVisable(!isCartOpen) }}>
+        <CartIconContainer onClick={toggleCart}>
             <ShoppingIcon />
             <ItemCount>{quantity}</ItemCount>
         </CartIconContainer>
