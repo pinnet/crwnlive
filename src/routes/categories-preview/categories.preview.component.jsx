@@ -7,6 +7,7 @@ import CategoryPreview from '../../components/category-preview/category-preview.
  * @returns {JSX.Element} The CategoriesPreview component.
  */
 const CategoriesPreview = () => {
+
     const categoriesMap = useSelector(selectCategories);
     return (
     <Fragment>

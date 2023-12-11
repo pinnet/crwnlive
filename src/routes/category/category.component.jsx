@@ -7,13 +7,19 @@ import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
 
 const Category = () => {
+    
+    console.log('Render/Rerender Category');
+
     const { category } = useParams();
-    const categoriesMap = useSelector(selectCategories);
-    const [ products, setProducts] = useState(categoriesMap[category]);
+    const categories = useSelector(selectCategories);
+    const [ products, setProducts] = useState(categories[category]);
+
+    
     
     useEffect(() => {
-        setProducts(categoriesMap[category]);
-    }, [category, categoriesMap]);
+        console.log('Set Products fired');
+        setProducts(categories[category]);
+    }, [category, categories]);
 
 
     const title = category.toUpperCase();
