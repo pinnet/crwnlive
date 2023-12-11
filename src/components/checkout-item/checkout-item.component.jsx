@@ -15,8 +15,9 @@
  */
 
 import { CheckoutItemContainer, ImageContainer, Quantity, Arrow, Value, RemoveButton, BaseSpan} from './checkout-item.styles'
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+import { useDispatch,useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { removeItemFromCart, addItemToCart, removeAllFromCart } from '../../store/cart/cart.actions';
 
 /**
  * Renders a checkout item component.
@@ -31,12 +32,21 @@ import { CartContext } from '../../contexts/cart.context';
  * @returns {JSX.Element} The rendered checkout item component.
  */
 const CheckoutItem = ({cartItem}) => {
-    
-    const {addItemToCart,removeItemFromCart,removeAllFromCart } = useContext(CartContext);
+    const currentCartItems = useSelector(selectCartItems);
+    const dispatch = useDispatch();
+
+    const removeItem = () => {
+        dispatch(removeItemFromCart(currentCartItems,cartItem));
+    }
+    const addItem = () => {
+        dispatch(addItemToCart(currentCartItems,cartItem));
+    }
+    const removeAll = () => {
+        dispatch(removeAllFromCart(currentCartItems,cartItem));
+    }
+
     const { name, imageUrl, price, quantity,itemTotal } = cartItem;
-    const removeItem = () => { removeItemFromCart(cartItem); }
-    const addItem = () => { addItemToCart(cartItem); }
-    const removeAll = () => { removeAllFromCart(cartItem); }
+    
     return (
         <CheckoutItemContainer>
             <ImageContainer>
