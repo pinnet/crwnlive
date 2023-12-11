@@ -1,3 +1,11 @@
+/**
+ * @file categories.reducer.js
+ * @created Mon Dec 11 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
+
 import { CATEGORIES_ACTION_TYPES } from './categories.types';
 
 export const CATEGORIES_INITIAL_STATE = {

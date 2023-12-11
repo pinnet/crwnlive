@@ -1,3 +1,9 @@
+/**
+ * @file cart.reducer.js
+ * @created Mon Dec 11 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 import { CART_ACTION_TYPES } from './cart.types';
   
 export const cartReducer = ( state = INITIAL_STATE, action) => {

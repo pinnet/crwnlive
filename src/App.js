@@ -1,14 +1,13 @@
-/*
- * App.js
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+*  @file App.js
+*  @created Mon Dec 11 2023
+*  @copyright Copyright (c) 2023 dannyarnold.com
+*  @author Danny Arnold
+**/
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+// --------------------------------------------------------
 import { setCurrentUser } from './store/user/user.actions';
 import { onAuthStateChangedListener, createUserDocumentFromGoogleAuth } from './utils/firebase.utils';
 import Navigation from './components/navigation/navigation.component';

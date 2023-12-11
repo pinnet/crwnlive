@@ -1,3 +1,9 @@
+/**
+ * @file cart.selector.js
+ * @created Mon Dec 11 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 import { createSelector } from 'reselect'; 
 
 const selectCartReducer = (state) => state.cart;

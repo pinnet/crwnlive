@@ -1,3 +1,9 @@
+/**
+ * @file cart.actions.js
+ * @created Mon Dec 11 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 import { createAction } from '../../utils/reducer/reducer.utils';
 import { addItemToCartItems, removeItemFromCartItems } from '../../utils/cart/cart.actions.utils';
 import { CART_ACTION_TYPES } from './cart.types';

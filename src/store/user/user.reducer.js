@@ -1,3 +1,10 @@
+/**
+ * @file user.reducer.js
+ * @created Mon Dec 11 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
 import { USER_ACTION_TYPES } from './user.types';
 
 export const userReducer = (state = INITIAL_STATE, action) => {
