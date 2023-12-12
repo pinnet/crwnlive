@@ -160,8 +160,8 @@ export const createUserDocumentFromAuth = async (userAuth, extraInfo) => {
             throw new Error('Error creating user', error.message);
         }
     }
-    return userDocRef;
-}
+    return userSnapShot;
+};
 /**
  * Signs the user out.
  * @returns {Promise<void>} A promise that resolves when the user is signed out.

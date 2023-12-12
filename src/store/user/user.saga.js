@@ -23,8 +23,7 @@ export function* isUserAuthenticated() {
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserDocumentFromAuth, userAuth, additionalData);
-    const userSnapshot = yield userRef.get();
+    const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalData);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));

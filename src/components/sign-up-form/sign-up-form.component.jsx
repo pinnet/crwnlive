@@ -7,10 +7,7 @@
  */
 
 import { useState} from 'react';
-import { 
-    createAuthUserFromEmailAndPassword,
-    createUserDocumentFromGoogleAuth
-} from '../../utils/firebase.utils';
+import { createAuthUserFromEmailAndPassword } from '../../utils/firebase.utils';
 import { SignUpContainer } from  './sign-up-form.styles';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';

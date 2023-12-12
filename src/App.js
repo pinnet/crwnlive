@@ -5,15 +5,19 @@
 *  @author Danny Arnold
 **/
 //#region library imports
+import { useEffect } from 'react';
+import { useDispatch} from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 //#endregion
-
+//#region custom imports
+import { checkUserSession } from './store/user/user.actions';
 import Navigation from './components/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
 import Contact from './routes/contact/contact.component';
 import Authentication from './routes/auth/authtentication.component.jsx';
 import Checkout from './routes/checkout/checkout.component.jsx';
+//#endregion
 
 /**
  * The main component of the application.
@@ -21,6 +25,12 @@ import Checkout from './routes/checkout/checkout.component.jsx';
  */
 const App = () => {
   
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserSession());
+  },[dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

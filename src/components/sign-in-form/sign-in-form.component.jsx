@@ -12,7 +12,6 @@ import FormInput from '../form-input/form-input.component';
 import  Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { 
     signInWithGooglePopUp,
-    createUserDocumentFromGoogleAuth,
     signInWithEmailAndPasswordAuth    
  } from '../../utils/firebase.utils';
 
