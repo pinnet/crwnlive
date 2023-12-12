@@ -11,8 +11,8 @@ import { USER_ACTION_TYPES } from './user.types';
 export const signUpUserStart = ( email, password, displayName ) => {
   return createAction(USER_ACTION_TYPES.SIGN_UP_START, { email, password, displayName });
 }
-export const signUpUserSuccess = (user) => {
-  return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, user);
+export const signUpUserSuccess = (user, additionalData) => {
+  return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS,{ user, additionalData });
 }
 export const signUpUserFailure = (error) => {
   return createAction(USER_ACTION_TYPES.SIGN_UP_FAILURE, error);

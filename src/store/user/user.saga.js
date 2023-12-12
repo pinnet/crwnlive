@@ -19,11 +19,22 @@ import {
   } from './user.actions';
 
 
+  export function* signOut() {
+    try {
+      yield call(signUserOut);
+      yield put(signOutSuccess());
+    } catch (error) {
+      yield put(signOutFailure(error));
+    }
+  }
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield call(getSnapshotFromUserAuth, user, additionalData);
+}
+
 export function* signUpUser({ payload: { displayName, email, password } }) {
   try {
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
-    yield call(createUserDocumentFromAuth, user, { displayName });
-    yield put(signUpUserSuccess(user));
+    yield put(signUpUserSuccess({ user, additionalData: { displayName }}));
   } catch (error) {
     yield put(signUpUserFailure(error));
   }
@@ -55,7 +66,7 @@ export function* onCheckUserSession() {
 
 export function* signInWithGoogle() {
   try {
-    const { user } = yield signInWithGooglePopUp();
+    const { user } = yield call(signInWithGooglePopUp);
     yield call(getSnapshotFromUserAuth, user);
     yield put(signInSuccess(user));
   } catch (error) {
@@ -73,8 +84,11 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
-export function* onCreateUserStart() {
+export function* signUpUserStart() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUpUser);
+}
+export function* onSignUpSuccess() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* onGoogleSignInStart() {
@@ -89,15 +103,6 @@ export function* onSignOutStart() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
 
-export function* signOut() {
-  try {
-    yield call(signUserOut);
-    yield put(signOutSuccess());
-  } catch (error) {
-    yield put(signOutFailure(error));
-  }
-}
-
 
 export function* userSagas() {
   yield all([
@@ -105,7 +110,8 @@ export function* userSagas() {
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignOutStart),
-    call(onCreateUserStart)
+    call(signUpUserStart),
+    call(onSignUpSuccess)
   ]);
 }
  

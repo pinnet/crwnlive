@@ -28,15 +28,21 @@ export const userReducer = (state = INITIAL_STATE, action) => {
           ...state,
           isSigningIn: true
         }
-      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:  
+      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
+        {
+          return {
+            ...state,
+            currentUser: payload,
+            isSignUpUser: false,
+            signUpError: null
+          }
+        }  
       case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
         return {
           ...state,
           currentUser: payload,
           isSigningIn: false,
           signInError: null,
-          isSignUpUser: false,
-          signUpError: null
         }
       case USER_ACTION_TYPES.SIGN_IN_FAILURE:
         return {
