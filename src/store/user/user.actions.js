@@ -8,18 +8,14 @@
 import { createAction } from '../../utils/reducer/reducer.utils';
 import { USER_ACTION_TYPES } from './user.types';
 
-export const createUserStart = (user) => {
-  return createAction(USER_ACTION_TYPES.CREATE_USER_START, user);
+export const signUpUserStart = ( email, password, displayName ) => {
+  return createAction(USER_ACTION_TYPES.SIGN_UP_START, { email, password, displayName });
 }
-export const createUserSuccess = (user) => {
-  return createAction(USER_ACTION_TYPES.CREATE_USER_SUCCESS, user);
+export const signUpUserSuccess = (user) => {
+  return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, user);
 }
-export const createUserFailure = (error) => {
-  return createAction(USER_ACTION_TYPES.CREATE_USER_FAILURE, error);
-}
-
-export const setCurrentUser = (user) => {  
-  return createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);
+export const signUpUserFailure = (error) => {
+  return createAction(USER_ACTION_TYPES.SIGN_UP_FAILURE, error);
 }
 
 export const checkUserSession = () => {

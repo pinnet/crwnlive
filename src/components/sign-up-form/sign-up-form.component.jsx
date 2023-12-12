@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 //#endregion
 
-import { createUserStart } from '../../store/user/user.actions';
+import { signUpUserStart } from '../../store/user/user.actions';
 import { SignUpContainer } from  './sign-up-form.styles';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
@@ -46,7 +46,7 @@ const SignUpForm = () => {
             return;
         }
         try {
-            dispatch(createUserStart({ displayName, email, password }));
+            dispatch(signUpUserStart({  email, password, displayName }));
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

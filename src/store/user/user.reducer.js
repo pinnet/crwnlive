@@ -11,32 +11,32 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   
     const { type, payload } = action;
     switch(type) {
-      case USER_ACTION_TYPES.CREATE_USER_START:
+      case USER_ACTION_TYPES.SIGN_UP_START:
         return {
           ...state,
-          isCreatingUser: true
+          isSignUpUser: true
         }
-      case USER_ACTION_TYPES.CREATE_USER_FAILURE:
+      case USER_ACTION_TYPES.SIGN_UP_FAILURE:
         return {
           ...state,
-          isCreatingUser: false,
-          createUserError: payload
+          isSignUpUser: false,
+          signUpError: payload
         }
-      case USER_ACTION_TYPES.CREATE_USER_SUCCESS:
       case USER_ACTION_TYPES.GOOGLE_SIGN_IN_START:
       case USER_ACTION_TYPES.EMAIL_SIGN_IN_START:
         return {
           ...state,
           isSigningIn: true
         }
+      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:  
       case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
         return {
           ...state,
           currentUser: payload,
           isSigningIn: false,
           signInError: null,
-          createUserError: null,
-          isCreatingUser: false
+          isSignUpUser: false,
+          signUpError: null
         }
       case USER_ACTION_TYPES.SIGN_IN_FAILURE:
         return {
@@ -73,6 +73,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     signInError: null,
     isSigningOut: false,
     signOutError: null,
-    isCreatingUser: false,
-    createUserError: null
+    isSignUpUser: false,
+    signUpError: null
   };

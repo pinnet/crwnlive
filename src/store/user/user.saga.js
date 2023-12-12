@@ -14,18 +14,18 @@ import {
     signInFailure,
     signOutSuccess,
     signOutFailure,
-    createUserSuccess,
-    createUserFailure  
+    signUpUserSuccess,
+    signUpUserFailure  
   } from './user.actions';
 
 
-export function* createNewUser({ payload: { displayName, email, password } }) {
+export function* signUpUser({ payload: { displayName, email, password } }) {
   try {
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
     yield call(createUserDocumentFromAuth, user, { displayName });
-    yield put(createUserSuccess(user));
+    yield put(signUpUserSuccess(user));
   } catch (error) {
-    yield put(createUserFailure(error));
+    yield put(signUpUserFailure(error));
   }
 }
 
@@ -56,6 +56,7 @@ export function* onCheckUserSession() {
 export function* signInWithGoogle() {
   try {
     const { user } = yield signInWithGooglePopUp();
+    yield call(getSnapshotFromUserAuth, user);
     yield put(signInSuccess(user));
   } catch (error) {
     yield put(signInFailure(error));
@@ -64,7 +65,8 @@ export function* signInWithGoogle() {
 
 export function* signInWithEmail({ payload: { email, password } }) {
   try {
-    const { user } = yield signInWithEmailAndPasswordAuth(email, password);
+    const { user } = yield call(signInWithEmailAndPasswordAuth, email, password);
+    yield call(getSnapshotFromUserAuth, user);
     yield put(signInSuccess(user));
   } catch (error) {
     yield put(signInFailure(error));
@@ -72,7 +74,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
 }
 
 export function* onCreateUserStart() {
-  yield takeLatest(USER_ACTION_TYPES.CREATE_USER_START, createNewUser);
+  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUpUser);
 }
 
 export function* onGoogleSignInStart() {
@@ -81,6 +83,10 @@ export function* onGoogleSignInStart() {
 
 export function* onEmailSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
+}
+
+export function* onSignOutStart() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
 
 export function* signOut() {
@@ -92,9 +98,6 @@ export function* signOut() {
   }
 }
 
-export function* onSignOutStart() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
-}
 
 export function* userSagas() {
   yield all([
