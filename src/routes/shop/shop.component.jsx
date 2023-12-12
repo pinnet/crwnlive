@@ -1,14 +1,17 @@
-/*
- * shop.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+ * @file shop.component.jsx
+ * @created Tue Dec 12 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
+//#region library imports
 import { useDispatch  } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchCategoriesAsync } from '../../store/categories/categories.actions';
 import { Routes,Route } from 'react-router-dom';
+//#endregion
+
+import { fetchCategoriesStart } from '../../store/categories/categories.actions';
 import Category from '../category/category.component';
 import CategoriesPreview from '../categories-preview/categories.preview.component';
 import './shop.styles.scss';
@@ -19,12 +22,11 @@ import './shop.styles.scss';
  */
 const Shop = () => {
     const dispatch = useDispatch();
-
     useEffect(() => {     
-        dispatch(fetchCategoriesAsync());
+        dispatch(fetchCategoriesStart());
     }, [dispatch]);
     
-  return (
+   return (
         <Routes>
             <Route index element={<CategoriesPreview />} />
             <Route path=":category" element={<Category />} />
