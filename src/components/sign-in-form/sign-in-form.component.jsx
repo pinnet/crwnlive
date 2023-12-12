@@ -5,13 +5,18 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
+
+//#region library imports
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.actions';
+//#endregion
 
+//#region local imports
 import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 import FormInput from '../form-input/form-input.component';
 import  Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+//#endregion
 
 const defaultFormState = {
     email: '',
