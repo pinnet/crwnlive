@@ -11,62 +11,31 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   
     const { type, payload } = action;
     switch(type) {
+        
       case USER_ACTION_TYPES.SIGN_UP_START:
-        return {
-          ...state,
-          isSignUpUser: true
-        }
-      case USER_ACTION_TYPES.SIGN_UP_FAILURE:
-        return {
-          ...state,
-          isSignUpUser: false,
-          signUpError: payload
-        }
       case USER_ACTION_TYPES.GOOGLE_SIGN_IN_START:
       case USER_ACTION_TYPES.EMAIL_SIGN_IN_START:
-        return {
-          ...state,
-          isSigningIn: true
-        }
-      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
-        {
-          return {
-            ...state,
-            currentUser: payload,
-            isSignUpUser: false,
-            signUpError: null
-          }
-        }  
-      case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
-        return {
-          ...state,
-          currentUser: payload,
-          isSigningIn: false,
-          signInError: null,
-        }
-      case USER_ACTION_TYPES.SIGN_IN_FAILURE:
-        return {
-          ...state,
-          isSigningIn: false,
-          signInError: payload
-        }
       case USER_ACTION_TYPES.SIGN_OUT_START:
         return {
           ...state,
-          isSigningOut: true
+          inAuthFlow: true
         }
+      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:  
+      case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
       case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
         return {
           ...state,
-          currentUser: null,
-          isSigningOut: false,
-          signOutError: null
+          currentUser: payload,
+          inAuthFlow: false,
+          authError: null,
         }
+      case USER_ACTION_TYPES.SIGN_UP_FAILURE:
+      case USER_ACTION_TYPES.SIGN_IN_FAILURE:
       case USER_ACTION_TYPES.SIGN_OUT_FAILURE:
         return {
           ...state,
-          isSigningOut: false,
-          signOutError: payload
+          inAuthFlow: false,
+          authError: payload
         }
       default:
         return state;
@@ -75,10 +44,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   }
   const INITIAL_STATE = {
     currentUser: null,
-    isSigningIn: false,
-    signInError: null,
-    isSigningOut: false,
-    signOutError: null,
-    isSignUpUser: false,
-    signUpError: null
+    inAuthFlow: false,
+    authError: null
   };

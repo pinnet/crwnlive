@@ -31,10 +31,10 @@ export function* signInAfterSignUp({ payload: { user, additionalData } }) {
   yield call(getSnapshotFromUserAuth, user, additionalData);
 }
 
-export function* signUpUser({ payload: { displayName, email, password } }) {
+export function* signUpUser({ payload: {  email, password, displayName } }) {
   try {
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
-    yield put(signUpUserSuccess({ user, additionalData: { displayName }}));
+    yield put(signUpUserSuccess(user,{ additionalData: { displayName }}));
   } catch (error) {
     yield put(signUpUserFailure(error));
   }
