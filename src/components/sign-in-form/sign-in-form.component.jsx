@@ -6,15 +6,17 @@
  * Author: Danny Arnold
  */
 
+//#region library imports
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.actions';
+//#endregion
+
+//#region local imports
 import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 import FormInput from '../form-input/form-input.component';
 import  Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
-import { 
-    signInWithGooglePopUp,
-    createUserDocumentFromGoogleAuth,
-    signInWithEmailAndPasswordAuth    
- } from '../../utils/firebase.utils';
+//#endregion
 
 const defaultFormState = {
     email: '',
@@ -26,6 +28,8 @@ const defaultFormState = {
  * @returns {JSX.Element} The sign-in form component.
  */
 const SignInForm = () => {
+
+    const dispatch = useDispatch();
 
     const [formState, setFormState] = useState(defaultFormState);
     const { email, password } = formState;
@@ -42,33 +46,15 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await signInWithEmailAndPasswordAuth(email, password);
+            dispatch(emailSignInStart(email, password));
             resetForm();
         } catch (error) {
-            switch (error.code) {
-                case 'auth/invalid-password':
-                    alert('Invalid password');
-                    break;
-                case 'auth/user-disabled':
-                    alert('User disabled');
-                    break;
-                case 'auth/user-not-found':
-                    alert('User not found');
-                    break;
-                case 'auth/invalid-credential':
-                    alert('Invalid credential');
-                    break;                
-                default:
-                    alert('Unknown error');
-            }
-            console.log(error.code, error.message); 
+            console.log(error);
         }
     }
-
     const signInWithGoogle = async () => {
         try {
-            const { user } = await signInWithGooglePopUp();
-            await createUserDocumentFromGoogleAuth(user);
+            dispatch(googleSignInStart());
         }
         catch (error) {
             console.log(error);

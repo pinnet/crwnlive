@@ -11,26 +11,36 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
-import { useSelector } from 'react-redux';
-import { selectCartOpen } from '../../store/cart/cart.selector';
-import { selectCurrentUser } from '../../store/user/user.selector';
+//#region library imports
+import { useSelector,useDispatch } from 'react-redux';
 import { NavigationContainer, LogoContainer, NavLinks, NavLink} from './navigation.styles'
-import { signUserOut } from '../../utils/firebase.utils';
 import { Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
+//#endregion
 
+//#region local imports
+import { signOutStart } from '../../store/user/user.actions';
+import { selectCartOpen } from '../../store/cart/cart.selector';
+import { selectCurrentUser } from '../../store/user/user.selector';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+//#endregion
+
 /**
  * Renders the navigation bar component.
  * @returns {JSX.Element} The rendered navigation bar.
  */
 const Navigation = () => {
+    const dispatch = useDispatch();
     const isCartOpen = useSelector(selectCartOpen);
     const currentUser = useSelector(selectCurrentUser);
     const  signOutHandler = async() => {
-        await signUserOut();
+        try {
+            dispatch(signOutStart());
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <Fragment>

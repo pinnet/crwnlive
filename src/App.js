@@ -1,40 +1,35 @@
-/*
- * App.js
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+*  @file App.js
+*  @created Mon Dec 11 2023
+*  @copyright Copyright (c) 2023 dannyarnold.com
+*  @author Danny Arnold
+**/
+//#region library imports
 import { useEffect } from 'react';
+import { useDispatch} from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import { setCurrentUser } from './store/user/user.actions';
-import { onAuthStateChangedListener, createUserDocumentFromGoogleAuth } from './utils/firebase.utils';
+//#endregion
+//#region custom imports
+import { checkUserSession } from './store/user/user.actions';
 import Navigation from './components/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
 import Contact from './routes/contact/contact.component';
 import Authentication from './routes/auth/authtentication.component.jsx';
 import Checkout from './routes/checkout/checkout.component.jsx';
+//#endregion
 
 /**
  * The main component of the application.
  * @returns {JSX.Element} The rendered App component.
  */
 const App = () => {
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-      if (user) {
-        await createUserDocumentFromGoogleAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
+    dispatch(checkUserSession());
   },[dispatch]);
-  
 
   return (
     <Routes>

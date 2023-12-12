@@ -85,7 +85,14 @@ export const getCategoriesAndDocuments = async () => {
     return querySnapshot.docs.map(docSnapshot => docSnapshot.data());
 }
     
-
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+}
 
 /**
  * The authentication object for Firebase.
@@ -114,6 +121,7 @@ export const signInWithGoogleRedirect = () => {
  * @throws {Error} - If email or password is null.
  */
 export const signInWithEmailAndPasswordAuth = (email, password) => {
+    //throw new Error('Error signing in');
     if (!email || !password) throw new Error('Email or Password is null');
     return signInWithEmailAndPassword(auth, email, password);
 }
@@ -135,7 +143,7 @@ export const createAuthUserFromEmailAndPassword = async (email, password) => {
  * @returns {Promise<DocumentReference>} - The reference to the created user document.
  * @throws {Error} - If userAuth is null or if there is an error creating the user document.
  */
-export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
+export const createUserDocumentFromAuth = async (userAuth, extraInfo) => {
     if (!userAuth) throw new Error('UserAuth is null');
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapShot = await getDoc(userDocRef);
@@ -153,13 +161,16 @@ export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
             throw new Error('Error creating user', error.message);
         }
     }
-    return userDocRef;
-}
+    return userSnapShot;
+};
 /**
  * Signs the user out.
  * @returns {Promise<void>} A promise that resolves when the user is signed out.
  */
- export const signUserOut = async () => await signOut(auth);
+ export const signUserOut = async () => {
+    //throw new Error('Error signing out');
+    await signOut(auth);
+}
 /**
  * Registers an authentication state change listener.
  * @param {function} callback - The callback function to be called when the authentication state changes.
