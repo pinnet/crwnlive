@@ -27,8 +27,8 @@ const Authentication = () => {
             const response = await getRedirectResult(auth);
             if (response) {
                 const { user } = response;
-                createUserDocumentFromGoogleAuth(user)
-                    .then((userRef) => { console.log(userRef); });
+                //createUserDocumentFromGoogleAuth(user)
+                //    .then((userRef) => { console.log(userRef); });
             }
         }
         if (!didMount) {

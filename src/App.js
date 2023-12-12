@@ -4,12 +4,10 @@
 *  @copyright Copyright (c) 2023 dannyarnold.com
 *  @author Danny Arnold
 **/
-import { useEffect } from 'react';
+//#region library imports
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-// --------------------------------------------------------
-import { setCurrentUser } from './store/user/user.actions';
-import { onAuthStateChangedListener, createUserDocumentFromGoogleAuth } from './utils/firebase.utils';
+//#endregion
+
 import Navigation from './components/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
@@ -22,19 +20,7 @@ import Checkout from './routes/checkout/checkout.component.jsx';
  * @returns {JSX.Element} The rendered App component.
  */
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-      if (user) {
-        await createUserDocumentFromGoogleAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
-  },[dispatch]);
   
-
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

@@ -13,7 +13,7 @@ import createSagaMiddleware  from 'redux-saga';
 //#endregion
 
 import { rootReducer } from './root.reducer';
-import { rootSaga } from './root.saga';
+import { rootSaga } from './root-saga';
 
 const production = process.env.NODE_ENV === 'production';
 

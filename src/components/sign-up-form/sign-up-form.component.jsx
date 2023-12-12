@@ -46,7 +46,7 @@ const SignUpForm = () => {
         }
         try {
             const { user } = await createAuthUserFromEmailAndPassword(email, password);
-            await createUserDocumentFromGoogleAuth(user, { displayName })
+            //await createUserDocumentFromGoogleAuth(user, { displayName })
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

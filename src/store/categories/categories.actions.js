@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-import { getCategoriesAndDocuments } from '../../utils/firebase.utils'; 
 import { createAction } from '../../utils/reducer/reducer.utils';
 import { CATEGORIES_ACTION_TYPES } from './categories.types';
 

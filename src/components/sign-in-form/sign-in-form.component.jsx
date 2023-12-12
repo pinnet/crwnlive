@@ -64,11 +64,10 @@ const SignInForm = () => {
             console.log(error.code, error.message); 
         }
     }
-
     const signInWithGoogle = async () => {
         try {
             const { user } = await signInWithGooglePopUp();
-            await createUserDocumentFromGoogleAuth(user);
+            //await createUserDocumentFromGoogleAuth(user);
         }
         catch (error) {
             console.log(error);

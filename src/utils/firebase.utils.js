@@ -85,7 +85,14 @@ export const getCategoriesAndDocuments = async () => {
     return querySnapshot.docs.map(docSnapshot => docSnapshot.data());
 }
     
-
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+}
 
 /**
  * The authentication object for Firebase.
@@ -135,7 +142,7 @@ export const createAuthUserFromEmailAndPassword = async (email, password) => {
  * @returns {Promise<DocumentReference>} - The reference to the created user document.
  * @throws {Error} - If userAuth is null or if there is an error creating the user document.
  */
-export const createUserDocumentFromGoogleAuth = async (userAuth, extraInfo) => {
+export const createUserDocumentFromAuth = async (userAuth, extraInfo) => {
     if (!userAuth) throw new Error('UserAuth is null');
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapShot = await getDoc(userDocRef);
