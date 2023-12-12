@@ -121,6 +121,7 @@ export const signInWithGoogleRedirect = () => {
  * @throws {Error} - If email or password is null.
  */
 export const signInWithEmailAndPasswordAuth = (email, password) => {
+    //throw new Error('Error signing in');
     if (!email || !password) throw new Error('Email or Password is null');
     return signInWithEmailAndPassword(auth, email, password);
 }
@@ -166,7 +167,10 @@ export const createUserDocumentFromAuth = async (userAuth, extraInfo) => {
  * Signs the user out.
  * @returns {Promise<void>} A promise that resolves when the user is signed out.
  */
- export const signUserOut = async () => await signOut(auth);
+ export const signUserOut = async () => {
+    //throw new Error('Error signing out');
+    await signOut(auth);
+}
 /**
  * Registers an authentication state change listener.
  * @param {function} callback - The callback function to be called when the authentication state changes.

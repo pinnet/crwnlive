@@ -5,9 +5,12 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
+//#region library imports
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+//#endregion
 
-import { useState} from 'react';
-import { createAuthUserFromEmailAndPassword } from '../../utils/firebase.utils';
+import { createUserStart } from '../../store/user/user.actions';
 import { SignUpContainer } from  './sign-up-form.styles';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
@@ -24,6 +27,7 @@ const defaultFormState = {
  * @returns {JSX.Element} The sign-up form component.
  */
 const SignUpForm = () => {
+    const dispatch = useDispatch();
     const [formState, setFormState] = useState(defaultFormState);
     const { displayName, email, password, confirmPassword } = formState;
     
@@ -42,8 +46,7 @@ const SignUpForm = () => {
             return;
         }
         try {
-            const { user } = await createAuthUserFromEmailAndPassword(email, password);
-            //await createUserDocumentFromGoogleAuth(user, { displayName })
+            dispatch(createUserStart({ displayName, email, password }));
             resetForm();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

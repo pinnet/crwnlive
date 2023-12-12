@@ -8,6 +8,16 @@
 import { createAction } from '../../utils/reducer/reducer.utils';
 import { USER_ACTION_TYPES } from './user.types';
 
+export const createUserStart = (user) => {
+  return createAction(USER_ACTION_TYPES.CREATE_USER_START, user);
+}
+export const createUserSuccess = (user) => {
+  return createAction(USER_ACTION_TYPES.CREATE_USER_SUCCESS, user);
+}
+export const createUserFailure = (error) => {
+  return createAction(USER_ACTION_TYPES.CREATE_USER_FAILURE, error);
+}
+
 export const setCurrentUser = (user) => {  
   return createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);
 }

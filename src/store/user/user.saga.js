@@ -4,11 +4,30 @@ import { signInWithEmailAndPasswordAuth,
          signInWithGooglePopUp,
          signUserOut,
          getCurrentUser,
-         createUserDocumentFromAuth } from '../../utils/firebase.utils';
+         createUserDocumentFromAuth,
+         createAuthUserFromEmailAndPassword 
+  } from '../../utils/firebase.utils';
 
 import { USER_ACTION_TYPES } from './user.types';
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure } from './user.actions';
+import { 
+    signInSuccess,
+    signInFailure,
+    signOutSuccess,
+    signOutFailure,
+    createUserSuccess,
+    createUserFailure  
+  } from './user.actions';
 
+
+export function* createNewUser({ payload: { displayName, email, password } }) {
+  try {
+    const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
+    yield call(createUserDocumentFromAuth, user, { displayName });
+    yield put(createUserSuccess(user));
+  } catch (error) {
+    yield put(createUserFailure(error));
+  }
+}
 
 export function* isUserAuthenticated() {
   try {
@@ -52,6 +71,10 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
+export function* onCreateUserStart() {
+  yield takeLatest(USER_ACTION_TYPES.CREATE_USER_START, createNewUser);
+}
+
 export function* onGoogleSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
@@ -78,6 +101,8 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
-    call(onSignOutStart)]);
+    call(onSignOutStart),
+    call(onCreateUserStart)
+  ]);
 }
  
