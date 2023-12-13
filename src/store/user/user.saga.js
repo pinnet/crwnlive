@@ -6,7 +6,7 @@ import { signInWithEmailAndPasswordAuth,
          getCurrentUser,
          createUserDocumentFromAuth,
          createAuthUserFromEmailAndPassword 
-  } from '../../utils/firebase.utils';
+  } from '../../utils/firebase/firebase.utils';
 
 import { USER_ACTION_TYPES } from './user.types';
 import { 

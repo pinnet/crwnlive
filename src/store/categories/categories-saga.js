@@ -5,7 +5,7 @@
  * @author Danny Arnold
  **/
 import { takeLatest, all, put, call } from 'redux-saga/effects';
-import { getCategoriesAndDocuments } from '../../utils/firebase.utils';
+import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
 import { fetchCategoriesSuccess, fetchCategoriesFail } from './categories.actions';
 import { CATEGORIES_ACTION_TYPES } from './categories.types';
 
