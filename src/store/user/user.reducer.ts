@@ -4,9 +4,19 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
+import { AnyAction } from 'redux';
 import { USER_ACTION_TYPES, UserType } from './user.types';
-import { UserAction } from './user.actions';
+import {
+    authSuccess,
+    authFailure,
+    signOutStart,
+    signOutSuccess,
+    checkUserSession,
+    googleSignInStart,
+    emailSignInStart,
+    signUpUserSuccess,
+    signUpUserStart,
+} from './user.actions';
 
 export type UserState = {
     currentUser: UserType | null;
@@ -21,41 +31,67 @@ const INITIAL_STATE: UserState = {
 
 export const userReducer = (
     state = INITIAL_STATE,
-    action = {} as UserAction
+    action = {} as AnyAction
 ) => {
-    switch (action.type) {
-        case USER_ACTION_TYPES.SIGN_UP_START:
-        case USER_ACTION_TYPES.GOOGLE_SIGN_IN_START:
-        case USER_ACTION_TYPES.EMAIL_SIGN_IN_START:
-        case USER_ACTION_TYPES.SIGN_OUT_START:
-            return {
-                ...state,
-                inAuthFlow: true,
-            };
-        case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
-        case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
-            return {
-                ...state,
-                currentUser: payload,
-                inAuthFlow: false,
-                authError: null,
-            };
-        case USER_ACTION_TYPES.SIGN_UP_FAILURE:
-        case USER_ACTION_TYPES.SIGN_IN_FAILURE:
-        case USER_ACTION_TYPES.SIGN_OUT_FAILURE:
-            return {
-                ...state,
-                inAuthFlow: false,
-                authError: payload,
-            };
-        case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
-            return {
-                ...state,
-                currentUser: null,
-                inAuthFlow: false,
-                authError: null,
-            };
-        default:
-            return state;
+    if (checkUserSession.match(action)) {
+        return {
+            ...state,
+            inAuthFlow: true,
+        };
     }
+    if (authSuccess.match(action)) {
+        return {
+            ...state,
+            currentUser: action.payload,
+            inAuthFlow: false,
+            authError: null,
+        };
+    }
+    if (authFailure.match(action)) {
+        return {
+            ...state,
+            authError: action.payload,
+            inAuthFlow: false,
+        };
+    }
+    if (signOutStart.match(action)) {
+        return {
+            ...state,
+            inAuthFlow: true,
+        };
+    }
+    if (signOutSuccess.match(action)) {
+        return {
+            ...state,
+            currentUser: null,
+            inAuthFlow: false,
+        };
+    }
+    if (googleSignInStart.match(action)) {
+        return {
+            ...state,
+            inAuthFlow: true,
+        };
+    }
+    if (emailSignInStart.match(action)) {
+        return {
+            ...state,
+            inAuthFlow: true,
+        };
+    }
+    if (signUpUserStart.match(action)) {
+        return {
+            ...state,
+            inAuthFlow: true,
+        };
+    }
+    if (signUpUserSuccess.match(action)) {
+        return {
+            ...state,
+            currentUser: action.payload,
+            inAuthFlow: false,
+            authError: null,
+        };
+    }
+    return state;
 };

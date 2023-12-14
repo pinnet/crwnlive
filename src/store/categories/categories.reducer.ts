@@ -4,13 +4,19 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
+
+//#region library imports
 import { AnyAction } from 'redux';
+//#endregion
+
+//#region application imports
 import { Category } from './categories.types';
 import {
     fetchCategoriesStart,
     fetchCategoriesSuccess,
     fetchCategoriesFail,
 } from './categories.actions';
+//#endregion
 
 export type CategoriesState = {
     categories: Category[];
