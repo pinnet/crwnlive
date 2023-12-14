@@ -4,9 +4,13 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
-import { CATEGORIES_ACTION_TYPES, Category } from './categories.types';
-import { CategoryAction } from './categories.actions';
+import { AnyAction } from 'redux';
+import { Category } from './categories.types';
+import {
+    fetchCategoriesStart,
+    fetchCategoriesSuccess,
+    fetchCategoriesFail,
+} from './categories.actions';
 
 export type CategoriesState = {
     categories: Category[];
@@ -22,27 +26,27 @@ export const CATEGORIES_INITIAL_STATE: CategoriesState = {
 
 export const categoriesReducer = (
     state = CATEGORIES_INITIAL_STATE,
-    action = {} as CategoryAction
+    action = {} as AnyAction
 ) => {
-    switch (action.type) {
-        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START:
-            return {
-                ...state,
-                isLoading: true,
-            };
-        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
-            return {
-                ...state,
-                categories: action.payload,
-                isLoading: false,
-            };
-        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAIL:
-            return {
-                ...state,
-                error: action.payload,
-                isLoading: false,
-            };
-        default:
-            return state;
+    if (fetchCategoriesStart.match(action)) {
+        return {
+            ...state,
+            isLoading: true,
+        };
     }
+    if (fetchCategoriesSuccess.match(action)) {
+        return {
+            ...state,
+            categories: action.payload,
+            isLoading: false,
+        };
+    }
+    if (fetchCategoriesFail.match(action)) {
+        return {
+            ...state,
+            error: action.payload,
+            isLoading: false,
+        };
+    }
+    return state;
 };
