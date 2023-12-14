@@ -9,10 +9,10 @@ import { CartItem } from './cart.types';
 import { setCartItems, setCartOpen } from './cart.actions';
 
 export type CartState = {
-    cartItems: CartItem[];
-    cartCount: number;
-    cartTotal: number;
-    cartOpen: boolean;
+    readonly cartItems: CartItem[];
+    readonly cartCount: number;
+    readonly cartTotal: number;
+    readonly cartOpen: boolean;
 };
 
 const INITIAL_STATE: CartState = {
