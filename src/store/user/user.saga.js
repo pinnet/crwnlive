@@ -6,7 +6,7 @@ import { signInWithEmailAndPasswordAuth,
          getCurrentUser,
          createUserDocumentFromAuth,
          createAuthUserFromEmailAndPassword 
-  } from '../../utils/firebase.utils';
+  } from '../../utils/firebase/firebase.utils';
 
 import { USER_ACTION_TYPES } from './user.types';
 import { 
@@ -34,7 +34,7 @@ export function* signInAfterSignUp({ payload: { user, additionalData } }) {
 export function* signUpUser({ payload: {  email, password, displayName } }) {
   try {
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
-    yield put(signUpUserSuccess(user,{ additionalData: { displayName }}));
+    yield put(signUpUserSuccess(user,{ displayName }));
   } catch (error) {
     yield put(signUpUserFailure(error));
   }
@@ -45,7 +45,6 @@ export function* isUserAuthenticated() {
     const userAuth = yield call(getCurrentUser);
     if (!userAuth) return;
     yield call(getSnapshotFromUserAuth, userAuth);
-    yield put(signInSuccess(userAuth));
   } catch (error) {
     yield put(signInFailure(error));
   }

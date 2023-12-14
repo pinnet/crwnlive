@@ -12,6 +12,8 @@
  * Author: Danny Arnold
  */
 import { useSelector } from 'react-redux';
+
+import PaymentForm from '../../components/payment-form/payment-form.component';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
@@ -50,8 +52,8 @@ const Checkout = () => {
                 cartItems.map(item => <CheckoutItem key={item.id} cartItem={item} />)
             }            
             <Total>Total ${cartTotal}</Total>
+            <PaymentForm/>
         </CheckoutContainer>
-        
         );
 }
 
