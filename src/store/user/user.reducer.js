@@ -22,7 +22,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         }
       case USER_ACTION_TYPES.SIGN_UP_SUCCESS:  
       case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
-      case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
         return {
           ...state,
           currentUser: payload,
@@ -36,6 +35,13 @@ export const userReducer = (state = INITIAL_STATE, action) => {
           ...state,
           inAuthFlow: false,
           authError: payload
+        }
+      case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
+        return {
+          ...state,
+          currentUser: null,
+          inAuthFlow: false,
+          authError: null
         }
       default:
         return state;
