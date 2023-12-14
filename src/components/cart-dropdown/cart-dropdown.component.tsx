@@ -1,17 +1,14 @@
-
 /**
- * @file Renders a dropdown component for the cart.
+ * @file cart-dropdown.component.tsx
+ * @created Thu Dec 14 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ *
+ * @description Renders a dropdown component for the cart.
  * @module CartDropdown
  * @returns {JSX.Element} The rendered CartDropdown component.
  * @exports CartDropdown
  */
-/*
- * Created on Sat Dec 09 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
-
 //#region library imports
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,12 +18,6 @@ import { CartDropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.
 import Button,{ ButtonProps } from '../button/button.component';
 import CartItem, {CartItemProps} from '../cart-item/cart-item.component';
 
-type item = {
-    imageUrl: string,
-    price: number,
-    name: string,
-    quantity: number
-}
 
 /**
  * Renders a dropdown component for the cart.

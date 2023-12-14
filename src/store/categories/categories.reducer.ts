@@ -5,12 +5,18 @@
  * @author Danny Arnold
  **/
 
-import { CATEGORIES_ACTION_TYPES } from './categories.types';
+import { CATEGORIES_ACTION_TYPES, Category } from './categories.types';
 import { CategoryAction } from './categories.actions';
 
-export const CATEGORIES_INITIAL_STATE = {
+export type CategoriesState = {
+    categories: Category[];
+    isLoading: boolean;
+    error: Error | null;
+};
+
+export const CATEGORIES_INITIAL_STATE: CategoriesState = {
     categories: [],
-    isLoding: false,
+    isLoading: false,
     error: null,
 };
 
