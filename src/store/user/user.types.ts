@@ -4,8 +4,10 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
+import { UserData, AdditionalData } from '../../utils/firebase/firebase.utils';
 
 export enum USER_ACTION_TYPES {
+    SET_CURRENT_USER = 'user/SET_CURRENT_USER',
     CHECK_USER_SESSION = 'user/CHECK_USER_SESSION',
     GOOGLE_SIGN_IN_START = 'user/GOOGLE_SIGN_IN_START',
     EMAIL_SIGN_IN_START = 'user/EMAIL_SIGN_IN_START',
@@ -17,23 +19,7 @@ export enum USER_ACTION_TYPES {
     SIGN_UP_SUCCESS = 'user/CREATE_USER_SUCCESS',
 }
 
-export type UserType = {
-    id: string;
-    displayName: string;
-    email: string;
-    createdAt: Date;
-};
-
-export type AdditionalData = {
-    displayName: string;
-};
-
-export type SignInFlow = {
-    email: string;
-    password: string;
-};
-
 export type SignUpFlow = {
-    user: UserType;
+    user: UserData;
     additionalData: AdditionalData;
 };
