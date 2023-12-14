@@ -33,6 +33,18 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 //------------------------------------------------------------------------------ Exports
 
+ type additionalData = {
+    displayName: string,
+    email: string,
+    createdAt: Date
+ }
+
+ type DocumentReference = {
+    id: string,
+    path: string,
+    parent: any,
+    firestore: any
+ }
 /**
  * Firebase database instance.
  * @type {Firestore}
@@ -44,14 +56,14 @@ export const db = getFirestore();
  * @param {string} docId - The id of the document.
  * @returns {DocumentReference} - The document reference.
  */
-export const getDocumentRef = (collectionKey, docId) => doc(db, collectionKey, docId);
+export const getDocumentRef = (collectionKey: string , docId : string) => doc(db, collectionKey, docId);
 /**
  * Gets the document snapshot for the specified collection and document id.
  * @param {string} collectionKey - The key of the collection.
  * @param {string} docId - The id of the document.
  * @returns {Promise<DocumentSnapshot>} - The document snapshot.
  */
-export const getDocumentSnapshot = async (collectionKey, docId) => {
+export const getDocumentSnapshot = async (collectionKey: string, docId : string) => {
     const docRef = getDocumentRef(collectionKey, docId);
     return await getDoc(docRef);
 }
@@ -63,7 +75,7 @@ export const getDocumentSnapshot = async (collectionKey, docId) => {
  * @param {Array<Object>} objectsToAdd - An array of objects to add as documents.
  * @returns {Promise<void>} - A promise that resolves when the documents are successfully added.
  */
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (collectionKey: string, objectsToAdd: Array<any>) => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
     objectsToAdd.forEach(obj => {
@@ -120,7 +132,7 @@ export const signInWithGoogleRedirect = () => {
  * @returns {Promise} - A promise that resolves with the user's authentication information.
  * @throws {Error} - If email or password is null.
  */
-export const signInWithEmailAndPasswordAuth = (email, password) => {
+export const signInWithEmailAndPasswordAuth = (email: string , password: string ) => {
     //throw new Error('Error signing in');
     if ( !email || !password ) throw new Error('Email or Password is null');
     return signInWithEmailAndPassword(auth, email, password);
@@ -132,18 +144,18 @@ export const signInWithEmailAndPasswordAuth = (email, password) => {
  * @returns {Promise} - A promise that resolves with the created user.
  * @throws {Error} - If email or password is null.
  */
-export const createAuthUserFromEmailAndPassword = async (email, password) => {
+export const createAuthUserFromEmailAndPassword = async (email: string, password: string) => {
     if (!email || !password) throw new Error('Email or Password is null');
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 /**
  * Creates a user document in Firestore from Google authentication data.
  * @param {Object} userAuth - The user authentication data.
- * @param {Object} extraInfo - Additional information to be included in the user document.
+ * @param {Object} additionalData - Additional information to be included in the user document.
  * @returns {Promise<DocumentReference>} - The reference to the created user document.
  * @throws {Error} - If userAuth is null or if there is an error creating the user document.
  */
-export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) => {
+export const createUserDocumentFromAuth = async (userAuth : any, additionalData = {}) => {
     if (!userAuth) throw new Error('UserAuth is null');
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
@@ -157,7 +169,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) 
                 createdAt,
                 ...additionalData
             });
-        } catch (error) {
+        } catch (error: any) {
             throw new Error('Error creating user', error.message);
         }
     }
@@ -177,7 +189,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) 
  * @throws {Error} If the callback is null.
  * @returns {function} The unsubscribe function to stop listening for authentication state changes.
  */
-export const onAuthStateChangedListener = (callback) => {
+export const onAuthStateChangedListener = (callback: () => void) => {
     if (!callback) throw new Error('Callback is null');
     return onAuthStateChanged(auth, callback);
 };

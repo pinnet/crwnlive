@@ -6,7 +6,15 @@
  */
 
 import { CartItemContainer, ItemDetails} from './cart-item.styles';
+export type CartItemProps = {
+    item: {
+        imageUrl: string,
+        price: number,
+        name: string,
+        quantity: number
+    }
 
+}
 /**
  * Renders a cart item component.
  *
@@ -18,7 +26,7 @@ import { CartItemContainer, ItemDetails} from './cart-item.styles';
  * @param {number} item.quantity - The quantity of the item.
  * @returns {JSX.Element} The rendered cart item component.
  */
-const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
+const CartItem = ({ item: { imageUrl, price, name, quantity } }: CartItemProps) => {
     return (
         <CartItemContainer>
             <img alt={name} className='img' src={imageUrl} />

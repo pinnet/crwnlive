@@ -1,10 +1,9 @@
-/*
- * button.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+ * @file button.component.tsx
+ * @created Thu Dec 14 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 
 import { BaseButton, ButtonSpinner, GoogleSignInButton, InvertedButton } from './button.styles.jsx';
 
@@ -22,6 +21,12 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
 
     }[buttonType]);
 
+export type ButtonProps = {
+    buttonType: string,
+    children: React.ReactNode,
+    isLoading: boolean,
+    otherProps: any
+}
 /**
  * Button component.
  *
@@ -31,7 +36,8 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
  * @param {Object} props.otherProps - Additional props for the button element.
  * @returns {JSX.Element} The rendered Button component.
  */
-const Button = ({ children, buttonType, isLoading, ...otherProps }) => {
+
+const Button = ({ children, buttonType, isLoading, ...otherProps }: ButtonProps) => {
     const CustomButton = getButton(buttonType);
     return (
         <CustomButton disabled={isLoading} {...otherProps}>
