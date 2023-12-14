@@ -23,8 +23,6 @@ const PaymentForm = () => {
     const amount = useSelector(selectCartTotal);
     const [isProcessingPayment, setIsProcessingPayment] = useState(false);
     
-    console.log('--------------------- currentUser', currentUser);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) return;
@@ -62,7 +60,7 @@ const PaymentForm = () => {
 
     return (
         <PaymentFormContainer>
-            <FormContainer onSubmit={handleSubmit}>
+            <FormContainer name={'paymentForm'} onSubmit={handleSubmit}>
                 <h2>Credit Card Payment</h2>
                 <CardElement />
                 <PaymentButton isLoading={ isProcessingPayment } buttonType={BUTTON_TYPE_CLASSES.inverted} >Pay Now</PaymentButton>
