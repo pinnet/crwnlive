@@ -13,9 +13,7 @@ import {
     authSuccess,
     authFailure,
     signOutSuccess,
-    signOutFailure,
-    signUpUserSuccess,
-    signUpUserFailure  
+    signUpUserSuccess, 
   } from './user.actions';
 
 
@@ -24,7 +22,7 @@ import {
       yield call(signUserOut);
       yield put(signOutSuccess());
     } catch (error) {
-      yield put(signOutFailure(error));
+      yield put(authFailure(error));
     }
   }
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
@@ -36,7 +34,7 @@ export function* signUpUser({ payload: {  email, password, displayName } }) {
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
     yield put(signUpUserSuccess(user,{ displayName }));
   } catch (error) {
-    yield put(signUpUserFailure(error));
+    yield put(authFailure(error));
   }
 }
 

@@ -5,7 +5,7 @@
  * @author Danny Arnold
  **/
 
-import { BaseButton, ButtonSpinner, GoogleSignInButton, InvertedButton } from './button.styles.jsx';
+import { BaseButton, ButtonSpinner, GoogleSignInButton, InvertedButton } from './button.styles';
 
 export const BUTTON_TYPE_CLASSES = {
     base: 'base',
@@ -22,10 +22,11 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
     }[buttonType]);
 
 export type ButtonProps = {
-    buttonType: string,
-    children: React.ReactNode,
-    isLoading: boolean,
-    otherProps: any
+    buttonType?: string,
+    children?: React.ReactNode,
+    isLoading?: boolean,
+    onClick?: () => void,
+    otherProps?: any
 }
 /**
  * Button component.

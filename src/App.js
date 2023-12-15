@@ -15,8 +15,8 @@ import Navigation from './components/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
 import Contact from './routes/contact/contact.component';
-import Authentication from './routes/auth/authtentication.component.jsx';
-import Checkout from './routes/checkout/checkout.component.jsx';
+import Authentication from './routes/auth/authtentication.component';
+import Checkout from './routes/checkout/checkout.component';
 //#endregion
 
 /**
