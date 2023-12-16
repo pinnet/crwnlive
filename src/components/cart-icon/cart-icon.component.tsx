@@ -1,17 +1,14 @@
 /**
- * @file cart-icon.component.jsx
+ * @file cart-icon.component.tsx
+ * @created Sat Dec 16 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
  * @module CartIcon
  * @desc Represents a cart icon component.
  * @requires React
- * @requires cart-icon.styles.scss
  * @requires shopping-bag.svg
  */
-/*
- * Created on Sat Dec 09 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+
 import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
 import { useDispatch,useSelector } from 'react-redux';
 import { selectCartItemsCount, selectCartOpen } from '../../store/cart/cart.selector';
@@ -27,7 +24,7 @@ const CartIcon = () => {
     const isCartOpen = useSelector(selectCartOpen);
     const quantity = useSelector(selectCartItemsCount);
     
-    const toggleCart = () => {
+    const toggleCart = ():void => {
         dispatch(setCartOpen(!isCartOpen));
     }
     

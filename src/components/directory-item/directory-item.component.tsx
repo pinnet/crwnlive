@@ -16,7 +16,16 @@ import { useNavigate } from 'react-router-dom';
  * @param {Object} category - The category object containing title and imageUrl.
  * @returns {JSX.Element} The rendered category item component.
  */
-const DirectoryItem = ({ category: { title, imageUrl } }) => {
+
+export type DirectoryItemProps = {
+    category: {
+        title: string,
+        imageUrl: string
+    }
+
+};
+
+const DirectoryItem = ({ category: { title, imageUrl } }: DirectoryItemProps) => {
     const navigate = useNavigate();
 
     const handleClick = () => { navigate(`/shop/${title}`) };
