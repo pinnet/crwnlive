@@ -1,16 +1,10 @@
 /**
- * @fileoverview Checkout component for the shopping cart.
- * @module Checkout
- * @requires react
- * @requires react/context
- * @requires ../../contexts/cart.context
- * @requires ../../components/checkout-item/checkout-item.component
- * @exports Checkout
- * Created on Sat Dec 09 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+ * @file checkout.component.tsx
+ * @created Sat Dec 16 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
 import { useSelector } from 'react-redux';
 
 import PaymentForm from '../../components/payment-form/payment-form.component';
@@ -22,7 +16,7 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
  * Renders the Checkout component.
  * @returns {JSX.Element} The rendered Checkout component.
  */
-const Checkout = () => {
+const Checkout = (): JSX.Element => {
 
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);

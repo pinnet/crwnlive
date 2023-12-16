@@ -9,10 +9,15 @@ import { useDispatch,useSelector } from 'react-redux';
 import { addItemToCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { ProductCartContainer, Footer, Name, Price } from './product-card.styles';
-
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import { CategoryItem } from '../../store/categories/categories.types';
 
-const ProductCard = ({ product }) => {
+export type ProductCardProps = {
+    product: CategoryItem
+};
+
+
+const ProductCard = ({ product }: ProductCardProps) => {
     const dispatch = useDispatch();
     const currentCartItems = useSelector(selectCartItems);
     const { name, price, imageUrl } = product;

@@ -38,7 +38,7 @@ export type ButtonProps = {
  * @returns {JSX.Element} The rendered Button component.
  */
 
-const Button = ({ children, buttonType, isLoading, ...otherProps }: ButtonProps) => {
+const Button = ({ children, buttonType, isLoading, ...otherProps }: ButtonProps): JSX.Element => {
     const CustomButton = getButton(buttonType);
     return (
         <CustomButton disabled={isLoading} {...otherProps}>

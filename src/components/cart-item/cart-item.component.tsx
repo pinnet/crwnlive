@@ -26,7 +26,7 @@ export type CartItemProps = {
  * @param {number} item.quantity - The quantity of the item.
  * @returns {JSX.Element} The rendered cart item component.
  */
-const CartItem = ({ item: { imageUrl, price, name, quantity } }: CartItemProps) => {
+const CartItem = ({ item: { imageUrl, price, name, quantity } }: CartItemProps): JSX.Element => {
     return (
         <CartItemContainer>
             <img alt={name} className='img' src={imageUrl} />

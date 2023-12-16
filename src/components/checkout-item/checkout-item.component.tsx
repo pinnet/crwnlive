@@ -13,12 +13,16 @@
  * Copyright (c) 2023 dannyarnold.com
  * Author: Danny Arnold
  */
+import { useDispatch,useSelector } from 'react-redux';
 
 import { CheckoutItemContainer, ImageContainer, Quantity, Arrow, Value, RemoveButton, BaseSpan} from './checkout-item.styles'
-import { useDispatch,useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { removeItemFromCart, addItemToCart, removeAllFromCart } from '../../store/cart/cart.actions';
+import { CartItem } from '../../store/cart/cart.types';
 
+export type CheckoutItemProps = {
+    cartItem: CartItem
+};
 /**
  * Renders a checkout item component.
  *
@@ -31,7 +35,7 @@ import { removeItemFromCart, addItemToCart, removeAllFromCart } from '../../stor
  * @param {number} props.cartItem.itemTotal - The total price of the item.
  * @returns {JSX.Element} The rendered checkout item component.
  */
-const CheckoutItem = ({cartItem}) => {
+const CheckoutItem = ({cartItem}: CheckoutItemProps): JSX.Element => {
     const currentCartItems = useSelector(selectCartItems);
     const dispatch = useDispatch();
 

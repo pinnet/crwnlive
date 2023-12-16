@@ -1,23 +1,21 @@
-/*
- * form-input.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+ * @file form-input.component.tsx
+ * @created Sat Dec 16 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 
 import { FormInputLabel, Input, Group} from  './form-input.styles';
-/**
- * A reusable form input component.
- *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.handleChange - The function to handle input change.
- * @param {string} props.label - The label for the input.
- * @param {Object} props.otherProps - Additional props for the input element.
- * @returns {JSX.Element} The rendered FormInput component.
- */
-const FormInput = ({ handleChange, label, ...otherProps }) => (
+
+export type FormInputProps = {
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    label?: string,
+    value: string,
+    name: string,
+    type: string,
+    required?: boolean
+};
+const FormInput = ({ handleChange, label, ...otherProps }: FormInputProps) :JSX.Element => (
     <Group>
         <Input onChange={handleChange} {...otherProps} />
         {

@@ -5,9 +5,13 @@
  * @author Danny Arnold
  **/
 
-import './form.styles.scss';
+import './form.styles.scss'
+export type FormProps = {
+    children: React.ReactNode
+};
 
-const Form = ({ children, ...otherProps }) => (
+
+const Form = ({ children, ...otherProps }: FormProps) => (
     <form className='form' {...otherProps}>
         {children}
     </form>

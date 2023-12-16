@@ -1,21 +1,12 @@
-
 /**
- * Renders a category item component.
- *
- * @component
- * @param {Object} category - The category object.
- * @param {string} category.title - The title of the category.
- * @param {string} category.imageUrl - The URL of the category image.
- * @returns {JSX.Element} The rendered category item component.
- */
+ * @file directory-item.component.tsx
+ * @created Sat Dec 16 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
 import { BackgroundImage, Body, DirectoryItemContainer, } from './directory-item.styles';
 import { useNavigate } from 'react-router-dom';
-/**
- * Renders a category item component.
- *
- * @param {Object} category - The category object containing title and imageUrl.
- * @returns {JSX.Element} The rendered category item component.
- */
 
 export type DirectoryItemProps = {
     category: {
@@ -25,7 +16,7 @@ export type DirectoryItemProps = {
 
 };
 
-const DirectoryItem = ({ category: { title, imageUrl } }: DirectoryItemProps) => {
+const DirectoryItem = ({ category: { title, imageUrl } }: DirectoryItemProps): JSX.Element => {
     const navigate = useNavigate();
 
     const handleClick = () => { navigate(`/shop/${title}`) };

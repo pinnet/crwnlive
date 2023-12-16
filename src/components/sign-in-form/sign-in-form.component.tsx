@@ -1,10 +1,9 @@
-/*
- * sign-in-form.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
+/**
+ * @file sign-in-form.component.tsx
+ * @created Sat Dec 16 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
 
 //#region library imports
 import { useState } from 'react';
@@ -38,12 +37,12 @@ const SignInForm = () => {
         setFormState(defaultFormState);
     };
 
-    const handleChange = (event) => {
+    const handleChange = (event: Event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event : Event) => {
         event.preventDefault();
         try {
             dispatch(emailSignInStart(email, password));

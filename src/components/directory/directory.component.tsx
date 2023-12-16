@@ -9,7 +9,7 @@ import DirectoryItem from '../directory-item/directory-item.component';
 import { DirectoryContainer } from './directory.styles'
 import directory from '../../data/directory-data';
 
-const Directory = () => {
+const Directory = (): JSX.Element => {
     return (
         <DirectoryContainer>
             { 

@@ -19,7 +19,7 @@ import { setCartOpen } from '../../store/cart/cart.actions';
  * @component
  * @returns {JSX.Element} The JSX element representing the cart icon.
  */
-const CartIcon = () => {
+const CartIcon = (): JSX.Element  => {
     const dispatch = useDispatch();
     const isCartOpen = useSelector(selectCartOpen);
     const quantity = useSelector(selectCartItemsCount);

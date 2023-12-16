@@ -9,21 +9,24 @@
  * @returns {JSX.Element} The rendered CartDropdown component.
  * @exports CartDropdown
  */
+
 //#region library imports
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 //#endregion
+
+//#region local imports
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { CartDropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.styles';
-import Button,{ ButtonProps } from '../button/button.component';
-import CartItem, {CartItemProps} from '../cart-item/cart-item.component';
-
+import Button from '../button/button.component';
+import CartItem from '../cart-item/cart-item.component';
+//#endregion
 
 /**
  * Renders a dropdown component for the cart.
  * @returns {JSX.Element} The rendered CartDropdown component.
  */
-const CartDropdown = () => {
+const CartDropdown = () : JSX.Element => {
     const cartItems = useSelector(selectCartItems);
     const navigate = useNavigate();
     const goToCheckout = () => {
