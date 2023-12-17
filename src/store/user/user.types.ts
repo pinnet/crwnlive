@@ -15,8 +15,8 @@ export enum USER_ACTION_TYPES {
     AUTH_FAILURE = 'user/AUTH_FAILURE',
     SIGN_OUT_START = 'user/SIGN_OUT_START',
     SIGN_OUT_SUCCESS = 'user/SIGN_OUT_SUCCESS',
-    SIGN_UP_START = 'user/CREATE_USER_START',
-    SIGN_UP_SUCCESS = 'user/CREATE_USER_SUCCESS',
+    SIGN_UP_START = 'user/SIGN_UP_START',
+    SIGN_UP_SUCCESS = 'user/SIGN_UP_SUCCESS',
 }
 
 export type SignUpFlow = {

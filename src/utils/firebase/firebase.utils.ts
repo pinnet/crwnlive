@@ -188,7 +188,7 @@ export const createAuthUserFromEmailAndPassword = async (
  */
 export const createUserDocumentFromAuth = async (
     userAuth: User,
-    additionalData: AdditionalData
+    additionalData?: AdditionalData
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
     if (!userAuth) throw new Error('UserAuth is null');
     const userDocRef = doc(db, 'users', userAuth.uid);

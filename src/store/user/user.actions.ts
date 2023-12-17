@@ -4,6 +4,7 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
+import { User } from 'firebase/auth';
 import { UserData, AdditionalData } from '../../utils/firebase/firebase.utils';
 import {
     createAction,
@@ -34,7 +35,10 @@ export const googleSignInStart = withMatcher((): GoogleSignInStart => {
     return createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
 });
 
-export type SignUpUserStart = Action<USER_ACTION_TYPES.SIGN_UP_START>;
+export type SignUpUserStart = ActionWithPayload<
+    USER_ACTION_TYPES.SIGN_UP_START,
+    { email: string; password: string; displayName: string }
+>;
 export const signUpUserStart = withMatcher(
     (email: string, password: string, displayName: string): SignUpUserStart => {
         return createAction(USER_ACTION_TYPES.SIGN_UP_START, {
@@ -69,10 +73,10 @@ export const emailSignInStart = withMatcher(
 
 export type SignUpUserSuccess = ActionWithPayload<
     USER_ACTION_TYPES.SIGN_UP_SUCCESS,
-    { user: UserData; additionalData: AdditionalData }
+    { user: User; additionalData: AdditionalData }
 >;
 export const signUpUserSuccess = withMatcher(
-    (user: UserData, additionalData: AdditionalData): SignUpUserSuccess => {
+    (user: User, additionalData: AdditionalData): SignUpUserSuccess => {
         return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {
             user,
             additionalData,
@@ -84,9 +88,11 @@ export type AuthSuccess = ActionWithPayload<
     USER_ACTION_TYPES.AUTH_SUCCESS,
     UserData
 >;
-export const authSuccess = withMatcher((user: UserData): AuthSuccess => {
-    return createAction(USER_ACTION_TYPES.AUTH_SUCCESS, user);
-});
+export const authSuccess = withMatcher(
+    (user: UserData & { id: string }): AuthSuccess => {
+        return createAction(USER_ACTION_TYPES.AUTH_SUCCESS, user);
+    }
+);
 
 export type AuthFailure = ActionWithPayload<
     USER_ACTION_TYPES.AUTH_FAILURE,
