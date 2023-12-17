@@ -27,25 +27,20 @@ declare global {
 }
 
 export type RootState = ReturnType<typeof rootReducer>;
-
 const production = process.env.NODE_ENV === 'production';
-
 type ExtendedPersistConfig = PersistConfig<RootState> & {
     whitelist: (keyof RootState)[];
 };
-
 const persistConfig: ExtendedPersistConfig = {
     key: 'root',
     storage,
     whitelist: ['cart'],
 };
-
 const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewares = [sagaMiddleware, !production && logger].filter(
     Boolean
-) as Middleware[]; // filter out falsy values (logger is undefined in production
-
+) as Middleware[];
 const composeEnhancer =
     (!production &&
         window &&
@@ -55,5 +50,4 @@ const composeEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
 export const store = createStore(persistedReducer, undefined, composeEnhancers);
 sagaMiddleware.run(rootSaga);
-
 export const persistor = persistStore(store);

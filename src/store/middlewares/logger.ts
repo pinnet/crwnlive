@@ -4,21 +4,20 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
 import { Middleware } from 'redux';
 import { RootState } from '../store';
 
+export const loggerMiddleware: Middleware<{}, RootState> =
+    (store) => (next) => (action) => {
+        //if(!action) return;
 
-export const loggerMiddleware: Middleware<{},RootState> = (store) => (next) => (action) => {
-    //if(!action) return;
-    
-    if(!action.type) {
-        return next(action);
-    }
-    console.log('type:', action.type);
-    console.log('payload:', action.payload);
-    console.log('current state', store.getState())
-    const result = next(action);
-    console.log('next state', store.getState());
-    return result;
-}
+        if (!action.type) {
+            return next(action);
+        }
+        console.log('type:', action.type);
+        console.log('payload:', action.payload);
+        console.log('current state', store.getState());
+        const result = next(action);
+        console.log('next state', store.getState());
+        return result;
+    };
