@@ -35,13 +35,10 @@ const Navigation = () => {
     const dispatch = useDispatch();
     const isCartOpen = useSelector(selectCartOpen);
     const currentUser = useSelector(selectCurrentUser);
-    const  signOutHandler = async() => {
-        try {
-            dispatch(signOutStart());
-        } catch (error) {
-            console.log(error);
-        }
+    const  signOutHandler = () => {
+        dispatch(signOutStart());
     }
+    
     return (
         <Fragment>
             <NavigationContainer>
@@ -54,7 +51,7 @@ const Navigation = () => {
                     <NavLink to="/contact">Contact</NavLink>
                     {
                         currentUser ? (
-                            <NavLink onClick={() => signOutHandler()}>Sign out</NavLink>) : (
+                            <NavLink to='/' as='span' onClick={signOutHandler}>Sign out</NavLink>) : (
                             <NavLink to="/auth">Sign in</NavLink>
                         )
                     }

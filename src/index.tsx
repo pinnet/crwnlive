@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2023, dannyarnold.com
  * @author Danny Arnold
  */
-
+/// <reference types="react-scripts" />
 //#region library imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -22,8 +22,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { stripePromise } from './utils/stripe/stripe.utils';
 //#endregion
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement as HTMLElement);
 root.render(
 <Provider store={store}>
   <PersistGate loading={null} persistor={persistor}>
