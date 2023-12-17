@@ -6,7 +6,7 @@
  **/
 
 //#region library imports
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.actions';
 //#endregion
@@ -22,10 +22,6 @@ const defaultFormState = {
     password: ''
 }
 
-/**
- * Represents a sign-in form component.
- * @returns {JSX.Element} The sign-in form component.
- */
 const SignInForm = () => {
 
     const dispatch = useDispatch();
@@ -37,12 +33,12 @@ const SignInForm = () => {
         setFormState(defaultFormState);
     };
 
-    const handleChange = (event: Event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
     }
 
-    const handleSubmit = async (event : Event) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             dispatch(emailSignInStart(email, password));
@@ -51,6 +47,7 @@ const SignInForm = () => {
             console.log(error);
         }
     }
+
     const signInWithGoogle = async () => {
         try {
             dispatch(googleSignInStart());
@@ -65,8 +62,8 @@ const SignInForm = () => {
             <h2>Already have an account</h2>
             <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
-                <FormInput handleChange={handleChange} label='Email' required type="email" name='email' value={email} autoComplete='username' />
-                <FormInput handleChange={handleChange} label='Password' required type="password" name='password' pattern='.{8,22}' title='minimum 8 characters' value={password} autoComplete='current-password' />
+                <FormInput label='Email' onChange={handleChange} required type="email" name='email' value={email} autoComplete='username'  />
+                <FormInput label='Password' onChange={handleChange} required type="password" name='password' pattern='.{8,22}' title='minimum 8 characters' value={password} autoComplete='current-password' />
                 <ButtonsContainer>
                     <Button type="submit" >Sign In</Button>
                     <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle} >Google Sign In</Button>

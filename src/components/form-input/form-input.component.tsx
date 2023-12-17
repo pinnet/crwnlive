@@ -4,22 +4,21 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
+import { FC,InputHTMLAttributes } from 'react';
 import { FormInputLabel, Input, Group} from  './form-input.styles';
 
 export type FormInputProps = {
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     label?: string,
-    value: string,
-    name: string,
-    type: string,
-    required?: boolean
-};
-const FormInput = ({ handleChange, label, ...otherProps }: FormInputProps) :JSX.Element => (
+} & InputHTMLAttributes<HTMLInputElement>;
+
+const FormInput : FC<FormInputProps> = ({ label, ...otherProps }) :JSX.Element => (
     <Group>
-        <Input onChange={handleChange} {...otherProps} />
+        <Input {...otherProps as React.InputHTMLAttributes<HTMLInputElement>} />
         {
-            label ? (<FormInputLabel $srink={otherProps.value.length}>{label}</FormInputLabel>) : null
+            label && (
+            <FormInputLabel $shrink={Boolean(otherProps.value && typeof otherProps.value === 'string' &&  otherProps.value.length)}>
+                {label}
+                </FormInputLabel>)
         }
     </Group>
 )

@@ -4,16 +4,16 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
+import { FC, ButtonHTMLAttributes } from 'react';
 import { BaseButton, ButtonSpinner, GoogleSignInButton, InvertedButton } from './button.styles';
 
-export const BUTTON_TYPE_CLASSES = {
-    base: 'base',
-    google: 'google-sign-in',
-    inverted: 'inverted'
+export enum BUTTON_TYPE_CLASSES{
+    base = 'base',
+    google = 'google-sign-in',
+    inverted = 'inverted'
 }
 
-const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) : typeof BaseButton => (
     {
         [BUTTON_TYPE_CLASSES.base]: BaseButton,
         [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
@@ -22,23 +22,11 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => (
     }[buttonType]);
 
 export type ButtonProps = {
-    buttonType?: string,
-    children?: React.ReactNode,
+    buttonType?: BUTTON_TYPE_CLASSES,
     isLoading?: boolean,
-    onClick?: () => void,
-    otherProps?: any
-}
-/**
- * Button component.
- *
- * @param {Object} props - The component props.
- * @param {string} props.buttonType - The type of button.
- * @param {ReactNode} props.children - The content of the button.
- * @param {Object} props.otherProps - Additional props for the button element.
- * @returns {JSX.Element} The rendered Button component.
- */
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children, buttonType, isLoading, ...otherProps }: ButtonProps): JSX.Element => {
+const Button: FC<ButtonProps> = ({ children, buttonType, isLoading, ...otherProps }): JSX.Element => {
     const CustomButton = getButton(buttonType);
     return (
         <CustomButton disabled={isLoading} {...otherProps}>
