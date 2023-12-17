@@ -3,14 +3,13 @@
  * @created Mon Dec 11 2023
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
- **/
+ *
 import { Middleware } from 'redux';
 import { RootState } from '../store';
 
 export const loggerMiddleware: Middleware<{}, RootState> =
     (store) => (next) => (action) => {
         //if(!action) return;
-
         if (!action.type) {
             return next(action);
         }
@@ -21,3 +20,4 @@ export const loggerMiddleware: Middleware<{}, RootState> =
         console.log('next state', store.getState());
         return result;
     };
+*/
