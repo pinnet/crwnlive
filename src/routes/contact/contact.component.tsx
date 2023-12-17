@@ -1,17 +1,10 @@
-/*
- * contact.component.jsx
- * Created on Fri Dec 08 2023
- *
- * Copyright (c) 2023 dannyarnold.com
- * Author: Danny Arnold
- */
-
-import './contact.styles.scss'
-
 /**
- * Renders the Contact component.
- * @returns {JSX.Element} The Contact component.
- */
+ * @file contact.component.tsx
+ * @created Sun Dec 17 2023
+ * @copyright Copyright (c) 2023 dannyarnold.com
+ * @author Danny Arnold
+ **/
+
 const Contact = () => ( 
     <div>
         Welcome to the Contact Page

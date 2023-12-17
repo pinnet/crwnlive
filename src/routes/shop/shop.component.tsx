@@ -14,7 +14,6 @@ import { Routes,Route } from 'react-router-dom';
 import { fetchCategoriesStart } from '../../store/categories/categories.actions';
 import Category from '../category/category.component';
 import CategoriesPreview from '../categories-preview/categories.preview.component';
-import './shop.styles.scss';
 
 const Shop = () => {
     const dispatch = useDispatch();
