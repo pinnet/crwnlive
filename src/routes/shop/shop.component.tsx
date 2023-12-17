@@ -16,10 +16,6 @@ import Category from '../category/category.component';
 import CategoriesPreview from '../categories-preview/categories.preview.component';
 import './shop.styles.scss';
 
-/**
- * Renders the Shop component.
- * @returns {JSX.Element} The rendered Shop component.
- */
 const Shop = () => {
     const dispatch = useDispatch();
     useEffect(() => {     

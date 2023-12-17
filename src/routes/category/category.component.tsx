@@ -7,9 +7,13 @@ import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
 import Spinner from '../../components/spinner/spinner.component';
 
+type CategoryRouteParams = {
+    category: string;
+}
+
 const Category = () => {    
     const categories = useSelector(selectCategoriesMap);
-    const { category } = useParams();
+    const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
     const [ products, setProducts] = useState(categories[category]);
     const isLoading = useSelector(selectCategoriesIsLoading);
 

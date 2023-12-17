@@ -4,11 +4,10 @@
  * @copyright Copyright (c) 2023 dannyarnold.com
  * @author Danny Arnold
  **/
-
+import { FormHTMLAttributes } from 'react';
 import './form.styles.scss'
 export type FormProps = {
-    children: React.ReactNode
-};
+} & FormHTMLAttributes<HTMLFormElement>;
 
 
 const Form = ({ children, ...otherProps }: FormProps) => (
