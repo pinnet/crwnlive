@@ -46,9 +46,7 @@ const Navigation = () => {
                     <Logo />
                 </LogoContainer>
                 <NavLinks>
-                    <NavLink to="/">Home</NavLink>
                     <NavLink to="/shop">Shop</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
                     {
                         currentUser ? (
                             <NavLink to='/' as='span' onClick={signOutHandler}>Sign out</NavLink>) : (

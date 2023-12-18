@@ -56,7 +56,7 @@ const CheckoutItem = ({cartItem}: CheckoutItemProps): JSX.Element => {
             <ImageContainer>
                 <img alt={name} src={imageUrl} />
             </ImageContainer>
-            <BaseSpan>{name} X ${price}</BaseSpan>
+            <BaseSpan>{name} <br/> ${price}</BaseSpan>
             <Quantity>
                 <Arrow onClick={removeItem}>&#10094;</Arrow>
                 <Value>{quantity}</Value>

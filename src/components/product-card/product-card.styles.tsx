@@ -61,11 +61,11 @@ export const ProductCartContainer = styled.div`
 `;
 
 export const Footer = styled.div`
-  width: 100%;
+  width: 90%;
   height: 5%;
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Name = styled.span`

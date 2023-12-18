@@ -6,8 +6,19 @@ export const CheckoutItemContainer = styled.div`
   min-height: 100px;
   border-bottom: 1px solid darkgrey;
   padding: 15px 0;
-  font-size: 20px;
+  font-size: 18px;
   align-items: center;
+  
+  @media screen and (max-width: 800px) {
+    span {
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    span {
+      font-size: 10px;
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -39,4 +50,7 @@ export const Value = styled.span`
 export const RemoveButton = styled.div`
   padding-left: 12px;
   cursor: pointer;
+  @media screen and (max-width: 800px) {
+    font-size: 16px;
+  }
 `;
