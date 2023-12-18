@@ -27,14 +27,14 @@ export const Body = styled.div`
   h2 {
     font-weight: bold;
     margin: 0 6px 0;
-    font-size: 22px;
+    font-size: 18px;
     color: #4a4a4a;
     text-transform: uppercase;
   }
 
   p {
     font-weight: lighter;
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
 
@@ -70,7 +70,7 @@ export const DirectoryItemContainer = styled.div`
     }
   }
 
-  @media screen and (max-width: 800px) {
-    height: 200px;
+  @media screen and (max-width: 450px) {
+   min-width: 60%;
   }
 `;
