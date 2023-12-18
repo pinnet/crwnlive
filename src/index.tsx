@@ -7,7 +7,6 @@
  */
 /// <reference types="react-scripts" />
 //#region library imports
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -16,8 +15,8 @@ import { Elements } from '@stripe/react-stripe-js';
 //#endregion
 
 //#region project imports
-import './index.scss';
-import{ store,persistor } from './store/store';
+import { GlobalStyle } from './global.styles';
+import { store,persistor } from './store/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { stripePromise } from './utils/stripe/stripe.utils';
@@ -25,6 +24,8 @@ import { stripePromise } from './utils/stripe/stripe.utils';
 const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement as HTMLElement);
 root.render(
+<>
+<GlobalStyle />
 <Provider store={store}>
   <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
@@ -34,6 +35,7 @@ root.render(
       </BrowserRouter> 
   </PersistGate>
 </Provider>
+</>
 );
 
 // If you want to start measuring performance in your app, pass a function

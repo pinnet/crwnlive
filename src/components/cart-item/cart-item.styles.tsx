@@ -22,4 +22,5 @@ export const ItemDetails = styled.div`
   span {
     font-size: 16px;
   }
+
 `;
